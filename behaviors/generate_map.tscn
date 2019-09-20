@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://actors/Asteroid.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node
+
+export var asteroid: PackedScene
+export var asteroid_threshold: float
+export var asteroid_size: float
+
+onready var scene_root: Node = $\"/root/Node2D\"
+onready var noise: OpenSimplexNoise = OpenSimplexNoise.new()
+func _ready():
+  noise.seed = randi()
+  
+  for x in range(50):
+    for y in range(50):
+      if noise.get_noise_2d(x, y) > asteroid_threshold:
+        var new_asteroid: Node = asteroid.instance()
+        new_asteroid.position = Vector2(x, y) * asteroid_size
+        print(\"made an asteroid baby at \" + str(new_asteroid.global_position.x) + \" \" + str(new_asteroid.global_position.y))
+        
+        add_child(new_asteroid)
+"
+
+[node name="generate_map" type="Node"]
+script = SubResource( 1 )
+asteroid = ExtResource( 1 )
+asteroid_threshold = 0.32
+asteroid_size = 25.0
