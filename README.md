@@ -1,3 +1,3 @@
-# godot-template
+# space-rts
 
-A template for Godot projects.
+A systems game based on the old browser game "The Space Game".
