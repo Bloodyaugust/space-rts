@@ -6,26 +6,84 @@
 script/source = "extends Node
 
 export var asteroid: PackedScene
-export var asteroid_threshold: float
-export var asteroid_size: float
+export var num_asteroids: int
+export var num_chunks: int
+export var chunk_size: int
+export var steps_per_chunk: int
+export var seed_id: int
 
-onready var scene_root: Node = $\"/root/Node2D\"
+onready var scene_tree := get_tree()
+onready var scene_root: Node = $\"../\"
 onready var noise: OpenSimplexNoise = OpenSimplexNoise.new()
+
+var step_per_chunk_size: float
+
+signal map_generated
+
 func _ready():
-  noise.seed = randi()
+  noise.octaves = 1;
+  noise.period = 5;
   
-  for x in range(50):
-    for y in range(50):
-      if noise.get_noise_2d(x, y) > asteroid_threshold:
-        var new_asteroid: Node = asteroid.instance()
-        new_asteroid.position = Vector2(x, y) * asteroid_size
-        print(\"made an asteroid baby at \" + str(new_asteroid.global_position.x) + \" \" + str(new_asteroid.global_position.y))
+  if (seed_id):
+    noise.seed = seed_id
+  
+  step_per_chunk_size = chunk_size / steps_per_chunk
+  
+  generate_map()
+  
+func get_noise_seed():
+  return noise.seed
+
+func generate_map():
+  var asteroids := scene_tree.get_nodes_in_group(\"Asteroids\")
+  
+  for asteroid in asteroids:
+    asteroid.queue_free()
+  
+  var chunks := []
+  
+  if (!seed_id):
+    noise.seed = randi()
+  
+  for chunk_x in range(num_chunks):
+    for chunk_y in range(num_chunks):
+      var chunk_noise_values := []
+      var aggregate_noise: float = 0
+      
+      for noise_x in range(steps_per_chunk):
+        var total_x: float = chunk_x + (noise_x * step_per_chunk_size)
         
-        add_child(new_asteroid)
-"
+        for noise_y in range(steps_per_chunk):
+          var total_y: float = chunk_y + (noise_y * step_per_chunk_size)
+          
+          chunk_noise_values.push_back(noise.get_noise_2d(total_x, total_y))
+          
+      for noise in chunk_noise_values:
+        aggregate_noise += noise
+      chunks.push_back({
+        \"value\": aggregate_noise / chunk_noise_values.size(),
+        \"x\": chunk_x,
+        \"y\": chunk_y
+      })
+      
+  chunks.sort_custom(self, \"_sort_chunks\")
+  
+  for i in range(num_asteroids):
+    var new_asteroid := asteroid.instance()
+    new_asteroid.position = Vector2(chunks[i][\"x\"], chunks[i][\"y\"]) * chunk_size
+    print(\"made an asteroid baby at \" + str(new_asteroid.global_position.x) + \" \" + str(new_asteroid.global_position.y))
+  
+    scene_root.call_deferred(\"add_child\", new_asteroid)
+    
+  emit_signal(\"map_generated\")
+
+func _sort_chunks(a, b):
+  return a[\"value\"] > b[\"value\"]"
 
 [node name="generate_map" type="Node"]
 script = SubResource( 1 )
 asteroid = ExtResource( 1 )
-asteroid_threshold = 0.32
-asteroid_size = 25.0
+num_asteroids = 10
+num_chunks = 50
+chunk_size = 25
+steps_per_chunk = 3
