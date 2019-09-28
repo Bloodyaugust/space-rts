@@ -1,0 +1,16 @@
+{
+  "id": "refinery",
+  "productiion": {
+    "inputs": [
+      {
+        "id": "ore",
+        "amount": 2
+      }
+    ],
+    "output": {
+      "id": "metal",
+      "amount": 1
+    },
+    "time": 5
+  }
+}

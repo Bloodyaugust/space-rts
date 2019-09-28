@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "Building",
+"language": "GDScript",
+"path": "res://scripts/classes/Building.gd"
+}, {
 "base": "Node",
 "class": "LevelLoader",
 "language": "GDScript",
 "path": "res://scripts/classes/LevelLoader.gd"
 } ]
 _global_script_class_icons={
+"Building": "",
 "LevelLoader": ""
 }
 

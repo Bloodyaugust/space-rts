@@ -55,27 +55,29 @@ height = 1080
 seamless = true
 noise = SubResource( 4 )
 
-[sub_resource type="GDScript" id=8]
+[sub_resource type="GDScript" id=6]
 script/source = "extends TextEdit
 
 onready var map_generator: Node = $\"../../generate_map\"
 
 func _ready():
   map_generator.connect(\"map_generated\", self, \"on_map_generated\")
+  
+  on_map_generated()
 
 func on_map_generated():
   text = str(map_generator.get_noise_seed())"
 
-[sub_resource type="OpenSimplexNoise" id=6]
+[sub_resource type="OpenSimplexNoise" id=7]
 octaves = 1
 period = 5.0
 persistence = 0.0
 lacunarity = 0.1
 
-[sub_resource type="NoiseTexture" id=7]
+[sub_resource type="NoiseTexture" id=8]
 width = 25
 height = 25
-noise = SubResource( 6 )
+noise = SubResource( 7 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -119,10 +121,10 @@ margin_bottom = 90.0
 theme = ExtResource( 2 )
 text = "this is text"
 readonly = true
-script = SubResource( 8 )
+script = SubResource( 6 )
 
 [node name="NoiseExperiment" type="Sprite" parent="."]
 visible = false
 position = Vector2( 22.6642, 58.6946 )
-texture = SubResource( 7 )
+texture = SubResource( 8 )
 [connection signal="pressed" from="CanvasLayer/Button" to="generate_map" method="generate_map"]
