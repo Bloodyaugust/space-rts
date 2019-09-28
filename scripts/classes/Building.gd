@@ -3,9 +3,13 @@ class_name Building
 
 export var id: String
 
+var inputs := []
+var output := {}
+var production_time: int
+
 #{
 #  "id": "refinery",
-#  "productiion": {
+#  "production": {
 #    "inputs": [
 #      {
 #        "id": "ore",
@@ -20,13 +24,17 @@ export var id: String
 #  }
 #}
 var _data := {}
-  
+
 func _ready():
   _data = _load_building()
-  
+  _parse_data()
+
 func _parse_data():
 #  Eat the data into a first party data structure
-    
+  inputs = _data["production"]["inputs"]
+  output = _data["production"]["output"]
+  production_time = _data["production"]["time"]
+
 func _load_building():
   var file = File.new()
   file.open("res://data/" + id + ".building.json", File.READ)

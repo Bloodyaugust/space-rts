@@ -1,6 +1,6 @@
 {
   "id": "refinery",
-  "productiion": {
+  "production": {
     "inputs": [
       {
         "id": "ore",
