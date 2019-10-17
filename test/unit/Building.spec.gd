@@ -13,4 +13,5 @@ func after_each():
 func test_assert_building_loads():
   test_building._ready()
   gut.p(test_building, 2)
-  assert_not_null(test_building.inputs[0])
+  assert_eq(test_building.inputs[0]["amount"], 2)
+  assert_eq(test_building.inputs[0]["id"], "ore")
