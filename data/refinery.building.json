@@ -1,5 +1,11 @@
 {
-  "id": "refinery",
+  "id": "Refinery",
+  "spawns": [
+    {
+      "id": "MiningDrone",
+      "count": 5
+    }
+  ],
   "production": {
     "inputs": [
       {
