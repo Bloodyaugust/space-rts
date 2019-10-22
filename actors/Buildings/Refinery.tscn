@@ -5,7 +5,7 @@
 
 [node name="Refinery" type="Node2D"]
 script = ExtResource( 1 )
-id = "Refinery"
+id = "refinery"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

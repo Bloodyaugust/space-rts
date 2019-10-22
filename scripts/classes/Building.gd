@@ -8,9 +8,13 @@ export var id: String
 onready var root = get_tree().get_root()
 
 var inputs := []
+var input_storage := []
 var output := {}
+var output_storage := []
+var producing: bool = false
 var production_time: int
 var spawns := []
+var time_to_production: int
 
 # {
 #   "id": "refinery",
@@ -36,6 +40,41 @@ var spawns := []
 # }
 var _data := {}
 
+func _process(delta):
+  _produce(delta)
+
+func _produce(delta):
+  if !producing:
+    var _all_satisfied: bool = true
+
+    for input in inputs:
+      var _num_of_input_stored: int = 0
+      for stored in input_storage:
+        if stored.id == input.id:
+          _num_of_input_stored += 1
+
+        if _num_of_input_stored >= input.amount:
+          break
+        
+      if _num_of_input_stored <= input.amount:
+        _all_satisfied = false
+        break
+    
+    if _all_satisfied:
+      producing = true
+      time_to_production = production_time
+      for input in inputs:
+        var _num_of_input_to_remove: int = input.amount
+        while _num_of_input_to_remove > 0:
+          input_storage.erase({"id": input.id})
+          _num_of_input_to_remove -= 1
+  else:
+    time_to_production -= delta
+
+    if time_to_production <= 0:
+      producing = false
+      print("produce!")
+      
 func _ready():
   _data = _load_building()
   _parse_data()
@@ -47,6 +86,8 @@ func _parse_data():
   output = _data["production"]["output"]
   production_time = _data["production"]["time"]
   spawns = _data["spawns"]
+
+  time_to_production = production_time
 
 func _spawn_children():
   for spawn_definition in spawns:

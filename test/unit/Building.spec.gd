@@ -6,7 +6,7 @@ var test_building : Building
 
 func before_each():
   test_building = Building.new()
-  test_building.id = "Refinery"
+  test_building.id = "refinery"
   add_child(test_building)
   gut.p("ran setup", 2)
 
