@@ -5,14 +5,15 @@ signal children_spawned
 
 export var id: String
 
-onready var root = get_tree().get_root()
+onready var tree = get_tree()
 
 var inputs := []
-var input_storage := []
+var input_storage := {}
 var output := {}
-var output_storage := []
+var output_storage := {}
 var producing: bool = false
 var production_time: int
+var root
 var spawns := []
 var time_to_production: int
 
@@ -48,37 +49,35 @@ func _produce(delta):
     var _all_satisfied: bool = true
 
     for input in inputs:
-      var _num_of_input_stored: int = 0
-      for stored in input_storage:
-        if stored.id == input.id:
-          _num_of_input_stored += 1
-
-        if _num_of_input_stored >= input.amount:
-          break
-        
-      if _num_of_input_stored <= input.amount:
+      print("input amount: " + str(input.amount))
+      if input_storage[input.id] < input.amount:
         _all_satisfied = false
         break
     
     if _all_satisfied:
       producing = true
       time_to_production = production_time
+
       for input in inputs:
-        var _num_of_input_to_remove: int = input.amount
-        while _num_of_input_to_remove > 0:
-          input_storage.erase({"id": input.id})
-          _num_of_input_to_remove -= 1
-  else:
+        input_storage[input.id] -= input.amount
+
+  if producing:
     time_to_production -= delta
 
     if time_to_production <= 0:
       producing = false
+      output_storage[output.id] += output.amount
       print("produce!")
       
 func _ready():
+  if tree:
+    root = tree.get_root()
+  
   _data = _load_building()
   _parse_data()
-  call_deferred("_spawn_children")
+  
+  if root:
+    call_deferred("_spawn_children")
 
 func _parse_data():
 #  Eat the data into a first party data structure
@@ -88,6 +87,9 @@ func _parse_data():
   spawns = _data["spawns"]
 
   time_to_production = production_time
+  for input in inputs:
+    input_storage[input.id] = 0
+  output_storage = {output.id: 0}
 
 func _spawn_children():
   for spawn_definition in spawns:
