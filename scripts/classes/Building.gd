@@ -49,7 +49,6 @@ func _produce(delta):
     var _all_satisfied: bool = true
 
     for input in inputs:
-      print("input amount: " + str(input.amount))
       if input_storage[input.id] < input.amount:
         _all_satisfied = false
         break
@@ -67,7 +66,6 @@ func _produce(delta):
     if time_to_production <= 0:
       producing = false
       output_storage[output.id] += output.amount
-      print("produce!")
       
 func _ready():
   if tree:
