@@ -39,4 +39,5 @@ func unclaim():
   emit_signal("job_available")
 
 func _ready():
+  add_to_group("Jobs")
   unclaim()

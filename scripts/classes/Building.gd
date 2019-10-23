@@ -4,6 +4,7 @@ class_name Building
 signal children_spawned
 
 export var id: String
+export var spawn_range: float
 
 onready var tree = get_tree()
 
@@ -96,7 +97,7 @@ func _spawn_children():
 
     for i in range(spawn_definition["count"]):
       new_actor = actor_packed_scene.instance()
-      new_actor.position = position
+      new_actor.position = position + Vector2(rand_range(-spawn_range / 2, spawn_range / 2), rand_range(-spawn_range / 2, spawn_range / 2))
 
       root.add_child(new_actor)
 
