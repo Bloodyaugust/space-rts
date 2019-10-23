@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node2D",
+"class": "Asteroid",
+"language": "GDScript",
+"path": "res://scripts/classes/Asteroid.gd"
+}, {
+"base": "Node2D",
 "class": "Building",
 "language": "GDScript",
 "path": "res://scripts/classes/Building.gd"
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://scripts/classes/LevelLoader.gd"
 } ]
 _global_script_class_icons={
+"Asteroid": "",
 "Building": "",
 "Job": "",
 "LevelLoader": ""
