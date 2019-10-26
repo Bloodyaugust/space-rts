@@ -99,6 +99,9 @@ func _spawn_children():
       new_actor = actor_packed_scene.instance()
       new_actor.position = position + Vector2(rand_range(-spawn_range / 2, spawn_range / 2), rand_range(-spawn_range / 2, spawn_range / 2))
 
+      if "parent_building" in new_actor:
+        new_actor.parent_building = self
+
       root.add_child(new_actor)
 
   emit_signal("children_spawned")

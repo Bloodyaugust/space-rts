@@ -1,12 +1,18 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scripts/classes/Drone.gd" type="Script" id=1]
+[ext_resource path="res://scripts/classes/MiningDrone.gd" type="Script" id=1]
 [ext_resource path="res://sprites/drones/mining_drone.png" type="Texture" id=2]
 
 [node name="MiningDrone" type="Node2D" groups=[
 "Drones",
 ]]
 script = ExtResource( 1 )
+health = 10.0
+job_range = 1500.0
+job_type = "mine"
+speed = 100.0
+mining_range = 100.0
+mining_rate = 0.5
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.5, 0.5 )

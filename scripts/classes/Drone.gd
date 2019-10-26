@@ -1,8 +1,10 @@
 extends Node2D
 class_name Drone
 
+signal drone_arrived
 signal drone_destroyed
 signal drone_idle
+signal drone_job_assigned
 signal drone_moving
 signal drone_working
 
@@ -26,6 +28,11 @@ func damage(amount: float):
     emit_signal("drone_destroyed")
 
 func do_idle():
+  if job != null:
+    job.unclaim()
+    job.disconnect("job_completed", self, "_on_job_completed")
+    job = null
+  
   state = DRONE_STATES.IDLE
   emit_signal("drone_idle")
 
@@ -41,12 +48,18 @@ func find_job():
   var _possible_jobs: Array = []
 
   for testing_job in _jobs:
-    if testing_job.type == job_type && position.distance_to(testing_job.position) <= job_range:
+    if testing_job.type == job_type && position.distance_to(testing_job.position) <= job_range && testing_job.state == Job.JOB_STATES.AVAILABLE:
       _possible_jobs.append(testing_job)
 
-  _possible_jobs.sort_custom(self, "_sort_jobs")
+  if _possible_jobs.size() > 0:
+    _possible_jobs.sort_custom(self, "_sort_jobs")
+    job = _possible_jobs[0]
 
-  job = _possible_jobs[0]
+    job.claim(self)
+    job.connect("job_completed", self, "_on_job_completed")
+    emit_signal("drone_job_assigned")
+  else:
+    do_idle()
 
 func move_towards(point: Vector2):
   var _direction_vector: Vector2 = (point - position).normalized()
@@ -55,11 +68,14 @@ func move_towards(point: Vector2):
     state = DRONE_STATES.MOVING
     emit_signal("drone_moving")
 
-  if point.distance_to(position) <= speed:
+  if point.distance_to(position) <= speed * get_process_delta_time():
     position = point
-    do_idle()
+    emit_signal("drone_arrived")
   else:
     global_translate(_direction_vector * speed * get_process_delta_time())
+
+func _on_job_completed():
+  do_idle()
 
 func _ready():
   do_idle()

@@ -35,8 +35,9 @@ func do_progress(amount: float):
 
 func unclaim():
   claimant = null
-  state = JOB_STATES.AVAILABLE
-  emit_signal("job_available")
+  if state != JOB_STATES.COMPLETE:
+    state = JOB_STATES.AVAILABLE
+    emit_signal("job_available")
 
 func _ready():
   add_to_group("Jobs")

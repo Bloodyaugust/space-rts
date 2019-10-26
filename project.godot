@@ -33,13 +33,19 @@ _global_script_classes=[ {
 "class": "LevelLoader",
 "language": "GDScript",
 "path": "res://scripts/classes/LevelLoader.gd"
+}, {
+"base": "Drone",
+"class": "MiningDrone",
+"language": "GDScript",
+"path": "res://scripts/classes/MiningDrone.gd"
 } ]
 _global_script_class_icons={
 "Asteroid": "",
 "Building": "",
 "Drone": "",
 "Job": "",
-"LevelLoader": ""
+"LevelLoader": "",
+"MiningDrone": ""
 }
 
 [application]
