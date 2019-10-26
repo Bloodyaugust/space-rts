@@ -3,9 +3,11 @@
 [ext_resource path="res://scripts/classes/Asteroid.gd" type="Script" id=1]
 [ext_resource path="res://sprites/asteroids/asteroid_1.png" type="Texture" id=2]
 
-[node name="Asteroid" type="Node2D"]
+[node name="asteroid" type="Node2D"]
 script = ExtResource( 1 )
+jobs_max = 5
 ore_range = [ 100, 200 ]
+scale_max = 3.0
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 1, 0 )
