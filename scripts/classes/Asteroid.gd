@@ -9,9 +9,11 @@ var ore: int
 
 func _ready():
   ore = int(rand_range(ore_range[0], ore_range[1]))
-  scale = Vector2(ore / ore_range[1], ore / ore_range[1])
+  var _ore_coefficient: float = (float(ore) / float(ore_range[1]))
+  var _scale_member: float = _ore_coefficient * scale_max
+  scale = Vector2(_scale_member, _scale_member)
 
-  var _num_jobs: int = clamp(int(jobs_max * (ore / ore_range[1])), 1, jobs_max)
+  var _num_jobs: int = clamp(int(jobs_max * _ore_coefficient), 1, jobs_max)
 
   for i in range(0, _num_jobs):
     var _new_job = Job.new()
