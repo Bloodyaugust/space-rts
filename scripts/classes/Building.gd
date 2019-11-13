@@ -11,6 +11,7 @@ onready var tree = get_tree()
 var inputs := []
 var input_storage := {}
 var output := {}
+var output_drone
 var output_storage := {}
 var producing: bool = false
 var production_time: int
@@ -66,8 +67,12 @@ func _produce(delta):
 
     if time_to_production <= 0:
       producing = false
-      output_storage[output.id] += output.amount
-      
+      match output.type:
+        "resource":
+          output_storage[output.id] += output.amount
+        "drone":
+          _spawn_child(output_drone)
+
 func _ready():
   if tree:
     root = tree.get_root()
@@ -88,21 +93,27 @@ func _parse_data():
   time_to_production = production_time
   for input in inputs:
     input_storage[input.id] = 0
-  output_storage = {output.id: 0}
+  match output.type:
+    "resource":
+      output_storage = {output.id: 0}
+    "drone":
+      output_drone = load("res://actors/Drones/{drone_id}.tscn".format({"drone_id": output.id}))
+
+func _spawn_child(scene):
+  var new_actor = scene.instance()
+  new_actor.position = position + Vector2(rand_range(-spawn_range / 2, spawn_range / 2), rand_range(-spawn_range / 2, spawn_range / 2))
+
+  if "parent_building" in new_actor:
+    new_actor.parent_building = self
+
+  root.add_child(new_actor)
 
 func _spawn_children():
   for spawn_definition in spawns:
     var actor_packed_scene := load("res://actors/" + spawn_definition["id"] + ".tscn")
-    var new_actor
 
     for i in range(spawn_definition["count"]):
-      new_actor = actor_packed_scene.instance()
-      new_actor.position = position + Vector2(rand_range(-spawn_range / 2, spawn_range / 2), rand_range(-spawn_range / 2, spawn_range / 2))
-
-      if "parent_building" in new_actor:
-        new_actor.parent_building = self
-
-      root.add_child(new_actor)
+      _spawn_child(actor_packed_scene)
 
   emit_signal("children_spawned")
 
