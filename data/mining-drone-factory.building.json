@@ -1,0 +1,22 @@
+{
+  "id": "mining-drone-factory",
+  "spawns": [
+    {
+      "id": "mining-drone",
+      "count": 5
+    }
+  ],
+  "production": {
+    "inputs": [
+      {
+        "id": "ore",
+        "amount": 2
+      }
+    ],
+    "output": {
+      "id": "metal",
+      "amount": 1
+    },
+    "time": 5
+  }
+}
