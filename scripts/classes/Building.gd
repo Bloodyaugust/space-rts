@@ -92,7 +92,7 @@ func _parse_data():
 
   time_to_production = production_time
   for input in inputs:
-    input_storage[input.id] = 5
+    input_storage[input.id] = 0
   match output.type:
     "resource":
       output_storage = {output.id: 0}
