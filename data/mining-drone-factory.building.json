@@ -13,6 +13,6 @@
       "id": "mining-drone",
       "amount": 1
     },
-    "time": 15
+    "time": 15000
   }
 }

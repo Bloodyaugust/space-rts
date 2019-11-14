@@ -92,11 +92,12 @@ func _parse_data():
 
   time_to_production = production_time
   for input in inputs:
-    input_storage[input.id] = 0
+    input_storage[input.id] = 5
   match output.type:
     "resource":
       output_storage = {output.id: 0}
     "drone":
+      print("res://actors/Drones/{drone_id}.tscn".format({"drone_id": output.id}))
       output_drone = load("res://actors/Drones/{drone_id}.tscn".format({"drone_id": output.id}))
 
 func _spawn_child(scene):
@@ -110,7 +111,7 @@ func _spawn_child(scene):
 
 func _spawn_children():
   for spawn_definition in spawns:
-    var actor_packed_scene := load("res://actors/" + spawn_definition["id"] + ".tscn")
+    var actor_packed_scene := load("res://actors/Drones/" + spawn_definition["id"] + ".tscn")
 
     for i in range(spawn_definition["count"]):
       _spawn_child(actor_packed_scene)
