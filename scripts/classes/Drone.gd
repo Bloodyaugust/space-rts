@@ -12,12 +12,13 @@ enum DRONE_STATES {IDLE, MOVING, WORKING, DESTROYED}
 
 export var health: float
 export var job_range: float
-export var job_type: String
+export var job_type_string: String
 export var speed: float
 
 onready var tree = get_tree()
 
 var job: Job
+var job_types: Array
 var state: int
 
 func damage(amount: float):
@@ -48,7 +49,7 @@ func find_job():
   var _possible_jobs: Array = []
 
   for testing_job in _jobs:
-    if testing_job.type == job_type && position.distance_to(testing_job.position) <= job_range && testing_job.state == Job.JOB_STATES.AVAILABLE:
+    if job_types.has(testing_job.type) && position.distance_to(testing_job.position) <= job_range && testing_job.state == Job.JOB_STATES.AVAILABLE:
       _possible_jobs.append(testing_job)
 
   if _possible_jobs.size() > 0:
@@ -78,6 +79,8 @@ func _on_job_completed():
   do_idle()
 
 func _ready():
+  job_types = Array(job_type_string.split(","))
+
   do_idle()
 
 func _sort_jobs(a, b):

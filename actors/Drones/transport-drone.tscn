@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/classes/TransportDrone.gd" type="Script" id=1]
+[ext_resource path="res://sprites/drone-parts/spaceParts_055.png" type="Texture" id=2]
+[ext_resource path="res://sprites/drone-parts/spaceParts_035.png" type="Texture" id=3]
+[ext_resource path="res://sprites/drone-parts/spaceParts_007.png" type="Texture" id=4]
+[ext_resource path="res://sprites/drone-parts/spaceParts_046.png" type="Texture" id=5]
+
+[node name="TransportDrone" type="Node2D" groups=[
+"Drones",
+]]
+script = ExtResource( 1 )
+health = 10.0
+job_range = 2000.0
+job_type_string = "load,unload"
+speed = 100.0
+
+[node name="Sprite6" type="Sprite" parent="."]
+position = Vector2( -14, -5 )
+scale = Vector2( 0.5, 0.575758 )
+texture = ExtResource( 2 )
+
+[node name="Sprite7" type="Sprite" parent="."]
+position = Vector2( 15, -5 )
+scale = Vector2( 0.5, 0.575758 )
+texture = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 30, 20 )
+texture = ExtResource( 4 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+position = Vector2( -30, 20 )
+texture = ExtResource( 4 )
+flip_h = true
+
+[node name="Sprite4" type="Sprite" parent="."]
+position = Vector2( 20, 60 )
+rotation = 1.5708
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="Sprite5" type="Sprite" parent="."]
+position = Vector2( -20, 60 )
+rotation = 1.5708
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+flip_v = true
