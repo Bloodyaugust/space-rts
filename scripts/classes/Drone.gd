@@ -44,12 +44,18 @@ func do_job_progress(amount: float):
 
   job.do_progress(amount)
 
-func find_job():
+func find_job(job_type = ""):
   var _jobs: Array = tree.get_nodes_in_group("Jobs")
   var _possible_jobs: Array = []
+  var _possible_job_types: Array = []
+
+  if job_type != "":
+    _possible_job_types = [job_type]
+  else:
+    _possible_job_types = job_types
 
   for testing_job in _jobs:
-    if job_types.has(testing_job.type) && position.distance_to(testing_job.position) <= job_range && testing_job.state == Job.JOB_STATES.AVAILABLE:
+    if _possible_job_types.has(testing_job.type) && position.distance_to(testing_job.position) <= job_range && testing_job.state == Job.JOB_STATES.AVAILABLE:
       _possible_jobs.append(testing_job)
 
   if _possible_jobs.size() > 0:
