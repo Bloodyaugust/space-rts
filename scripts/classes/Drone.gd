@@ -5,6 +5,7 @@ signal drone_arrived
 signal drone_destroyed
 signal drone_idle
 signal drone_job_assigned
+signal drone_job_completed
 signal drone_moving
 signal drone_working
 
@@ -44,7 +45,7 @@ func do_job_progress(amount: float):
 
   job.do_progress(amount)
 
-func find_job(job_type = ""):
+func find_job(job_type = "", job_data_id = ""):
   var _jobs: Array = tree.get_nodes_in_group("Jobs")
   var _possible_jobs: Array = []
   var _possible_job_types: Array = []
@@ -56,7 +57,11 @@ func find_job(job_type = ""):
 
   for testing_job in _jobs:
     if _possible_job_types.has(testing_job.type) && position.distance_to(testing_job.position) <= job_range && testing_job.state == Job.JOB_STATES.AVAILABLE:
-      _possible_jobs.append(testing_job)
+      if job_data_id != "":
+        if testing_job.data.id == job_data_id:
+          _possible_jobs.append(testing_job)
+      else:
+        _possible_jobs.append(testing_job)
 
   if _possible_jobs.size() > 0:
     _possible_jobs.sort_custom(self, "_sort_jobs")
@@ -82,6 +87,7 @@ func move_towards(point: Vector2):
     global_translate(_direction_vector * speed * get_process_delta_time())
 
 func _on_job_completed():
+  emit_signal("drone_job_completed")
   do_idle()
 
 func _ready():

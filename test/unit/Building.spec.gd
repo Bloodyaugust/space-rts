@@ -32,7 +32,7 @@ func test_assert_produces_output_when_input_satisfied():
   
   test_building.input_storage.ore = 2
 
-  gut.simulate(test_building, 5, 1)
+  gut.simulate(test_building, 5, 100)
   gut.p("test_building time_to_production: " + str(test_building.time_to_production))
   assert_eq(test_building.input_storage.ore, 0)
   assert_eq(test_building.output_storage.metal, 1)

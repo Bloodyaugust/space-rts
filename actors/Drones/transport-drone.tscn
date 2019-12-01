@@ -14,6 +14,7 @@ health = 10.0
 job_range = 2000.0
 job_type_string = "load,unload"
 speed = 100.0
+load_unload_rate = 0.5
 
 [node name="Sprite6" type="Sprite" parent="."]
 position = Vector2( -14, -5 )

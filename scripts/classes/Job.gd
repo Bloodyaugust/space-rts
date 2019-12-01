@@ -13,6 +13,7 @@ enum JOB_STATES {AVAILABLE, CLAIMED, IN_PROGRESS, COMPLETE}
 
 var claimant
 var completion: float
+var data := {}
 var state: int
 
 func claim(actor):

@@ -62,6 +62,13 @@ func _produce(delta):
       for input in inputs:
         input_storage[input.id] -= input.amount
 
+        if input.id != "ore":
+          for i in range(input.amount):
+            var _new_job = Job.new()
+            _new_job.type = "unload"
+            _new_job.data.id = input.id
+            add_child(_new_job)
+
   if producing:
     time_to_production -= delta
 
@@ -70,6 +77,13 @@ func _produce(delta):
       match output.type:
         "resource":
           output_storage[output.id] += output.amount
+
+          if output.type == "resource" && output.id != "ore":
+            for i in range(output.amount):
+              var _new_job = Job.new()
+              _new_job.type = "load"
+              _new_job.data.id = output.id
+              add_child(_new_job)
         "drone":
           _spawn_child(output_drone)
 
@@ -116,6 +130,14 @@ func _spawn_children():
     for i in range(spawn_definition["count"]):
       _spawn_child(actor_packed_scene)
 
+  for input in inputs:
+    if input.id != "ore":
+      for i in range(input.amount):
+        var _new_job = Job.new()
+        _new_job.type = "unload"
+        _new_job.data.id = input.id
+        add_child(_new_job)
+  
   emit_signal("children_spawned")
 
 func _load_building():
