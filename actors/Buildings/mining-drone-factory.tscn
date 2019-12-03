@@ -4,7 +4,9 @@
 [ext_resource path="res://sprites/buildings/spaceBuilding_024.png" type="Texture" id=2]
 [ext_resource path="res://sprites/buildings/spaceBuilding_009.png" type="Texture" id=3]
 
-[node name="MiningDroneFactory" type="Node2D"]
+[node name="MiningDroneFactory" type="Node2D" groups=[
+"Buildings",
+]]
 script = ExtResource( 1 )
 id = "mining-drone-factory"
 spawn_range = 100.0

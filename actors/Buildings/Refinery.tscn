@@ -3,7 +3,9 @@
 [ext_resource path="res://scripts/classes/Building.gd" type="Script" id=1]
 [ext_resource path="res://sprites/buildings/spaceBuilding_015.png" type="Texture" id=2]
 
-[node name="Refinery" type="Node2D"]
+[node name="Refinery" type="Node2D" groups=[
+"Buildings",
+]]
 script = ExtResource( 1 )
 id = "refinery"
 spawn_range = 100.0

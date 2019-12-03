@@ -50,7 +50,16 @@ func _process(delta):
         do_job_progress(mining_rate * delta)
 
   if _mining_state == MINING_STATES.RETURN_MATERIALS:
-    move_towards(parent_building.position) 
+    var _buildings = tree.get_nodes_in_group("Buildings")
+    var _refineries := []
+
+    for _building in _buildings:
+      if _building.id == "refinery":
+        _refineries.append(_building)
+
+    if _refineries.size() > 0:
+      _refineries.sort_custom(self, "_sort_refineries")
+      move_towards(_refineries[0].position)
     
 func _randomized_move_target():
   return job.global_position + (Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized() * mining_range)
@@ -62,3 +71,6 @@ func _ready():
   connect("drone_arrived", self, "_on_drone_arrived")
   connect("drone_idle", self, "_on_drone_idle")
   connect("drone_job_assigned", self, "_on_drone_job_assigned")
+
+func _sort_refineries(a, b):
+  return a.position.distance_squared_to(position) < b.position.distance_squared_to(position)
