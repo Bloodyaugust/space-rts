@@ -1,0 +1,115 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://resources/themes/kenney/kenney.tres" type="Theme" id=1]
+[ext_resource path="res://resources/themes/kenney/panel_texture.tres" type="StyleBox" id=2]
+[ext_resource path="res://sprites/buildings/logistics-drone-factory.png" type="Texture" id=3]
+[ext_resource path="res://resources/fonts/kenney_pixel_small.tres" type="DynamicFont" id=4]
+[ext_resource path="res://ui/elements/resource-item.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/elements/buildable-item.tscn" type="PackedScene" id=6]
+
+[node name="BuildingInspector" type="PanelContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 700.0
+margin_bottom = 251.752
+theme = ExtResource( 1 )
+custom_styles/panel = ExtResource( 2 )
+
+[node name="BuildingContent" type="HBoxContainer" parent="."]
+margin_left = 8.33924
+margin_top = 8.33924
+margin_right = 672.124
+margin_bottom = 224.339
+custom_constants/separation = 20
+alignment = 1
+
+[node name="BuildingStatus" type="VBoxContainer" parent="BuildingContent"]
+margin_left = 7.0
+margin_right = 245.0
+margin_bottom = 216.0
+rect_min_size = Vector2( 150, 0 )
+alignment = 1
+
+[node name="BuildingName" type="Label" parent="BuildingContent/BuildingStatus"]
+margin_right = 238.0
+margin_bottom = 24.0
+text = "Logistics Drone Factory"
+align = 1
+
+[node name="BuildingIcon" type="TextureRect" parent="BuildingContent/BuildingStatus"]
+margin_left = 36.0
+margin_top = 28.0
+margin_right = 201.0
+margin_bottom = 104.0
+size_flags_horizontal = 4
+texture = ExtResource( 3 )
+
+[node name="ProgressContainer" type="VBoxContainer" parent="BuildingContent/BuildingStatus"]
+margin_top = 108.0
+margin_right = 238.0
+margin_bottom = 160.0
+
+[node name="ProgressLabel" type="Label" parent="BuildingContent/BuildingStatus/ProgressContainer"]
+margin_right = 238.0
+margin_bottom = 24.0
+text = "Progress"
+align = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="BuildingContent/BuildingStatus/ProgressContainer"]
+margin_top = 28.0
+margin_right = 238.0
+margin_bottom = 52.0
+rounded = true
+
+[node name="HPContainer" type="VBoxContainer" parent="BuildingContent/BuildingStatus"]
+margin_top = 164.0
+margin_right = 238.0
+margin_bottom = 216.0
+
+[node name="HPLabel" type="Label" parent="BuildingContent/BuildingStatus/HPContainer"]
+margin_right = 238.0
+margin_bottom = 24.0
+text = "HP"
+align = 1
+
+[node name="HPBar" type="ProgressBar" parent="BuildingContent/BuildingStatus/HPContainer"]
+margin_top = 28.0
+margin_right = 238.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 0, 24 )
+rounded = true
+percent_visible = false
+
+[node name="HPAmountContainer" type="CenterContainer" parent="BuildingContent/BuildingStatus/HPContainer/HPBar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -5.0
+margin_bottom = -4.0
+
+[node name="HPAmount" type="Label" parent="BuildingContent/BuildingStatus/HPContainer/HPBar/HPAmountContainer"]
+margin_left = 99.0
+margin_right = 130.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 4 )
+text = "10/10"
+
+[node name="ResourceItems" type="VBoxContainer" parent="BuildingContent"]
+margin_left = 265.0
+margin_right = 415.0
+margin_bottom = 216.0
+rect_min_size = Vector2( 150, 0 )
+alignment = 1
+
+[node name="resource-item-metal" parent="BuildingContent/ResourceItems" instance=ExtResource( 5 )]
+
+[node name="BuildableItems" type="VBoxContainer" parent="BuildingContent"]
+margin_left = 435.0
+margin_right = 655.0
+margin_bottom = 216.0
+alignment = 1
+
+[node name="buildable-item" parent="BuildingContent/BuildableItems" instance=ExtResource( 6 )]
+margin_right = 220.638
+margin_bottom = 142.736

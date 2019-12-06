@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resources/themes/kenney/kenney.tres" type="Theme" id=1]
+[ext_resource path="res://ui/icons/drones/mining_drone.png" type="Texture" id=2]
+
+[node name="buildable-item" type="Button"]
+margin_top = 74.0
+margin_right = 220.638
+margin_bottom = 142.736
+hint_tooltip = "Metal: 5
+Time: 60"
+theme = ExtResource( 1 )
+text = "Transport Drone"
+icon = ExtResource( 2 )

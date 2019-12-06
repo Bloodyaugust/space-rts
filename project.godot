@@ -69,6 +69,10 @@ window/size/height=1080
 
 enabled=PoolStringArray( "godot-quick-find", "gut" )
 
+[gui]
+
+timers/tooltip_delay_sec=0.1
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
