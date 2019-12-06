@@ -60,6 +60,13 @@ config/name="space-rts"
 run/main_scene="res://scenes/main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+store="*res://lib/redux/store.gd"
+action_types="*res://lib/redux/action_types.gd"
+actions="*res://lib/redux/actions.gd"
+reducers="*res://lib/redux/reducers.gd"
+
 [display]
 
 window/size/width=1920

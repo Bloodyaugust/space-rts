@@ -4,18 +4,20 @@ onready var actions = get_node('/root/actions')
 onready var reducers = get_node('/root/reducers')
 onready var store = get_node('/root/store')
 
+onready var _empty_node = Node.new()
+
 func _ready():
   store.create([
-    {'name': 'game', 'instance': reducers},
-    {'name': 'player', 'instance': reducers},
-    {'name': 'tiles', 'instance': reducers}
+    {'name': 'game', 'instance': reducers}
   ], [
     {'name': '_on_store_changed', 'instance': self}
   ])
   store.dispatch(actions.game_set_start_time(OS.get_unix_time()))
-  store.dispatch(actions.player_set_food(100))
-  store.dispatch(actions.player_set_gold(100))
-  store.dispatch(actions.player_set_health(100))
 
 func _on_store_changed(name, state):
   print(name, ": ", state)
+
+func _unhandled_input(event):
+  if event is InputEventMouseButton and event.button_mask == BUTTON_MASK_LEFT:
+    store.dispatch(actions.game_selection(_empty_node))
+

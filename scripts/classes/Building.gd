@@ -6,6 +6,8 @@ signal children_spawned
 export var id: String
 export var spawn_range: float
 
+onready var actions = $"/root/actions"
+onready var store = $"/root/store"
 onready var tree = get_tree()
 
 var inputs := []
@@ -42,6 +44,14 @@ var time_to_production: int
 #   }
 # }
 var _data := {}
+
+func get_class():
+  return "Building"
+
+func handle_click(viewport, event, shape_index):
+  match event.button_mask:
+    BUTTON_MASK_LEFT:
+      store.dispatch(actions.game_selection(self))
 
 func _process(delta):
   _produce(delta)
