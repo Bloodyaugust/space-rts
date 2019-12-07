@@ -9,6 +9,7 @@
 [node name="TransportDrone" type="Node2D" groups=[
 "Drones",
 ]]
+scale = Vector2( 0.3, 0.3 )
 script = ExtResource( 1 )
 health = 10.0
 job_range = 2000.0

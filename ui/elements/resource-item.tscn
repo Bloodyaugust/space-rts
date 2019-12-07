@@ -4,6 +4,7 @@
 [ext_resource path="res://resources/themes/kenney/Spritesheet/UIpackSheet_transparent.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 433, 451, 14, 14 )
 

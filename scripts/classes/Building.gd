@@ -10,6 +10,8 @@ onready var actions = $"/root/actions"
 onready var store = $"/root/store"
 onready var tree = get_tree()
 
+var current_health: int
+var health: int
 var inputs := []
 var input_storage := {}
 var output := {}
@@ -109,6 +111,8 @@ func _ready():
 
 func _parse_data():
 #  Eat the data into a first party data structure
+  health = _data["health"]
+  current_health = health
   inputs = _data["production"]["inputs"]
   output = _data["production"]["output"]
   production_time = _data["production"]["time"]

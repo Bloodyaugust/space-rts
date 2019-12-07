@@ -1,5 +1,6 @@
 {
   "id": "logistics-drone-factory",
+  "health": 100,
   "spawns": [],
   "production": {
     "inputs": [
