@@ -2,18 +2,30 @@
   "id": "logistics-drone-factory",
   "health": 100,
   "spawns": [],
-  "production": {
-    "inputs": [
-      {
-        "id": "metal",
-        "amount": 5
-      }
-    ],
-    "output": {
+  "production": [
+    {
       "type": "drone",
       "id": "mining-drone",
-      "amount": 1
+      "amount": 1,
+      "time": 3000,
+      "inputs": [
+        {
+          "id": "metal",
+          "amount": 10
+        }
+      ]
     },
-    "time": 1500
-  }
+    {
+      "type": "drone",
+      "id": "logistics-drone",
+      "amount": 1,
+      "time": 1500,
+      "inputs": [
+        {
+          "id": "metal",
+          "amount": 5
+        }
+      ]
+    }
+  ]
 }

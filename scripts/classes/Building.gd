@@ -10,41 +10,20 @@ onready var actions = $"/root/actions"
 onready var store = $"/root/store"
 onready var tree = get_tree()
 
+var auto_build: bool = true
 var current_health: int
+var current_production: int = 0
 var health: int
-var inputs := []
 var input_storage := {}
-var output := {}
-var output_drone
+var output_drones := {}
 var output_storage := {}
 var producing: bool = false
+var production := []
 var production_time: int
 var root
 var spawns := []
 var time_to_production: int
 
-# {
-#   "id": "refinery",
-#   "spawns": [
-#     {
-#       "id": "mining-drone",
-#       "count": 5
-#     }
-#   ],
-#   "production": {
-#     "inputs": [
-#       {
-#         "id": "ore",
-#         "amount": 2
-#       }
-#     ],
-#     "output": {
-#       "id": "metal",
-#       "amount": 1
-#     },
-#     "time": 5
-#   }
-# }
 var _data := {}
 
 func get_class():
@@ -59,45 +38,39 @@ func _process(delta):
   _produce(delta)
 
 func _produce(delta):
+  var _producing_entity = production[current_production]
+
   if !producing:
     var _all_satisfied: bool = true
 
-    for input in inputs:
+    for input in _producing_entity["inputs"]:
       if input_storage[input.id] < input.amount:
         _all_satisfied = false
         break
     
     if _all_satisfied:
       producing = true
-      time_to_production = production_time
 
-      for input in inputs:
+      for input in _producing_entity["inputs"]:
         input_storage[input.id] -= input.amount
 
-        if input.id != "ore":
-          for i in range(input.amount):
-            var _new_job = Job.new()
-            _new_job.type = "unload"
-            _new_job.data.id = input.id
-            add_child(_new_job)
+        _spawn_jobs()
 
   if producing:
     time_to_production -= delta
 
     if time_to_production <= 0:
-      producing = false
-      match output.type:
-        "resource":
-          output_storage[output.id] += output.amount
+      if !auto_build:
+        producing = false
 
-          if output.type == "resource" && output.id != "ore":
-            for i in range(output.amount):
-              var _new_job = Job.new()
-              _new_job.type = "load"
-              _new_job.data.id = output.id
-              add_child(_new_job)
+      time_to_production = production_time
+      match _producing_entity.type:
+        "resource":
+          output_storage[_producing_entity.id] += _producing_entity.amount
+
+          _spawn_jobs()
         "drone":
-          _spawn_child(output_drone)
+          _spawn_child(output_drones[current_production])
 
 func _ready():
   if tree:
@@ -113,20 +86,24 @@ func _parse_data():
 #  Eat the data into a first party data structure
   health = _data["health"]
   current_health = health
-  inputs = _data["production"]["inputs"]
-  output = _data["production"]["output"]
-  production_time = _data["production"]["time"]
+  current_production = 0
+  production = _data["production"]
+  production_time = _data["production"][current_production]["time"]
   spawns = _data["spawns"]
 
   time_to_production = production_time
-  for input in inputs:
-    input_storage[input.id] = 0
-  match output.type:
-    "resource":
-      output_storage = {output.id: 0}
-    "drone":
-      print("res://actors/Drones/{drone_id}.tscn".format({"drone_id": output.id}))
-      output_drone = load("res://actors/Drones/{drone_id}.tscn".format({"drone_id": output.id}))
+  for product in production:
+    for input in product["inputs"]:
+      input_storage[input.id] = 0
+    
+    match product.type:
+      "resource":
+        output_storage[product.id] = 0
+      "drone":
+        output_drones[product.id] = load("res://actors/Drones/{drone_id}.tscn".format({"drone_id": product.id}))
+  
+  # if production.size() > 1:
+  #   auto_build = false
 
 func _spawn_child(scene):
   var new_actor = scene.instance()
@@ -143,16 +120,26 @@ func _spawn_children():
 
     for i in range(spawn_definition["count"]):
       _spawn_child(actor_packed_scene)
+  
+  _spawn_jobs()
 
-  for input in inputs:
+  emit_signal("children_spawned")
+
+func _spawn_jobs():
+  for input in production[current_production]["inputs"]:
     if input.id != "ore":
       for i in range(input.amount):
         var _new_job = Job.new()
         _new_job.type = "unload"
         _new_job.data.id = input.id
         add_child(_new_job)
-  
-  emit_signal("children_spawned")
+
+  for key in output_storage.keys():
+    for i in range(output_storage[key]):
+      var _new_job = Job.new()
+      _new_job.type = "load"
+      _new_job.data.id = production[current_production].id
+      add_child(_new_job)
 
 func _load_building():
   var file = File.new()

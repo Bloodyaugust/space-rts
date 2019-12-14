@@ -7,18 +7,18 @@
       "count": 5
     }
   ],
-  "production": {
-    "inputs": [
-      {
-        "id": "ore",
-        "amount": 2
-      }
-    ],
-    "output": {
+  "production": [
+    {
       "type": "resource",
       "id": "metal",
-      "amount": 1
-    },
-    "time": 500
-  }
+      "amount": 1,
+      "time": 500,
+      "inputs": [
+        {
+          "id": "ore",
+          "amount": 2
+        }
+      ]
+    }
+  ]
 }
