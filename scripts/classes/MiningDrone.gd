@@ -7,6 +7,7 @@ export var mining_range: float
 export var mining_rate: float
 
 var parent_building: Building
+var target_building: Building
 
 var _mining_state: int
 var _move_target: Vector2
@@ -20,7 +21,7 @@ func _on_drone_arrived():
     do_job_progress(0)
 
   if _mining_state == MINING_STATES.RETURN_MATERIALS:
-    parent_building.input_storage["ore"] += _ore_storage
+    target_building.input_storage["ore"] += _ore_storage
     _ore_storage = 0
     _mining_state = MINING_STATES.JOB
 
@@ -59,7 +60,8 @@ func _process(delta):
 
     if _refineries.size() > 0:
       _refineries.sort_custom(self, "_sort_refineries")
-      move_towards(_refineries[0].position)
+      target_building = _refineries[0]
+      move_towards(target_building.position)
     
 func _randomized_move_target():
   return job.global_position + (Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized() * mining_range)
