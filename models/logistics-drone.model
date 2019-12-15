@@ -1,0 +1,33 @@
+# Made using Asset Forge (2.0 preview-1)
+
+:materials
+
+[name:stone;color:RGBA(0.580, 0.569, 0.769, 1.000);shader:Standard;valueA:0.35;valueB:0;]
+[name:stoneDark;color:RGBA(0.400, 0.388, 0.647, 1.000);shader:Standard;valueA:0.35;valueB:0;]
+[name:stoneLight;color:RGBA(0.698, 0.686, 0.867, 1.000);shader:Standard;valueA:0.35;valueB:0;]
+[name:metalDark;color:RGBA(0.400, 0.506, 0.675, 1.000);texture:Metal/shack.png;shader:Standard;valueA:0.4;valueB:0.6;]
+[name:metal;color:RGBA(0.569, 0.643, 0.769, 1.000);texture:Metal/metal.png;shader:Standard;valueA:0.6;valueB:0.5;]
+[name:glass;color:RGBA(1.000, 1.000, 1.000, 1.000);shader:Unlit;]
+[name:_defaultMat;color:RGBA(0.939, 0.953, 1.000, 1.000);shader:Standard;valueA:0.35;valueB:0;]
+[name:dark;color:RGBA(0.302, 0.323, 0.400, 1.000);texture:Metal/metal.png;shader:Standard;valueA:0.35;valueB:0;]
+[name:metalPurple;color:RGBA(0.405, 0.358, 0.621, 1.000);texture:Metal/metalPlate.png;shader:Standard;valueA:0.35;valueB:0;]
+
+:models
+
+[name:;collection:Aircraft;type:hull_topFront;position:(0.0000, 1.0000, 1.8000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.4000);group:;locked:False;hidden:False;materials:metalPurple+metal;]
+[name:;collection:Aircraft;type:hull_front;position:(1.0000, 0.0000, 0.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 3.0000);group:;locked:False;hidden:False;materials:metal+metalPurple;]
+[name:;collection:Aircraft;type:hull_front;position:(-1.0000, 0.0000, 0.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 3.0000);group:;locked:False;hidden:False;materials:metal+metalPurple;]
+[name:;collection:Aircraft;type:hull_body;position:(0.0000, 0.0000, 1.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 3.0000);group:;locked:False;hidden:False;materials:metalPurple+metal;]
+[name:;collection:Aircraft;type:hull_topIntake;position:(0.0000, 0.6000, 2.5000);rotation:(270.0000, 180.0000, 0.0000);scale:(1.0000, 1.8000, 1.0000);group:;locked:False;hidden:False;materials:metalPurple+dark+dark;]
+[name:;collection:Aircraft;type:engine_turbineLarge%;position:(-1.0000, 0.0000, -2.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:metalPurple+metal+dark;]
+[name:;collection:Aircraft;type:engine_slant%;position:(0.0000, 0.0000, -1.0000);rotation:(0.0000, 180.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:dark+metalPurple+dark;]
+[name:;collection:Greebles;type:detail_ventSquare;position:(1.1313, 1.0000, -1.8250);rotation:(0.0000, 0.0000, 0.0000);scale:(2.1000, 1.0000, 3.8000);group:;locked:False;hidden:False;materials:dark+metalDark;]
+[name:;collection:Greebles;type:detail_ventSquare;position:(-1.1688, 1.0000, -1.8250);rotation:(0.0000, 0.0000, 0.0000);scale:(2.1000, 1.0000, 3.8000);group:;locked:False;hidden:False;materials:dark+metalDark;]
+[name:;collection:Greebles;type:detail_ventRoundSmall;position:(0.6921, 1.0000, -1.3253);rotation:(0.0000, 0.0000, 0.0000);scale:(4.1000, 1.0000, 4.6000);group:;locked:False;hidden:False;materials:metalDark+dark;]
+[name:;collection:Greebles;type:detail_ventRoundSmall;position:(-0.7079, 1.0000, -1.3253);rotation:(0.0000, 0.0000, 0.0000);scale:(4.1000, 1.0000, 4.6000);group:;locked:False;hidden:False;materials:metalDark+dark;]
+[name:;collection:Greebles;type:detail_pipeRibbed;position:(1.0000, 0.9000, 0.4460);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 5.0160);group:;locked:False;hidden:False;materials:metalDark;]
+[name:;collection:Greebles;type:detail_pipeRibbed;position:(-1.0000, 0.9000, 0.4650);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 4.9400);group:;locked:False;hidden:False;materials:metalDark;]
+[name:;collection:Aircraft;type:turbine_flaps;position:(-0.5000, 0.6000, 2.0000);rotation:(0.0000, 0.0000, 90.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:dark+metal+metalPurple;]
+[name:;collection:Aircraft;type:turbine_flaps;position:(0.5000, 0.6000, 2.0000);rotation:(0.0000, 0.0000, 270.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:dark+metal+metalPurple;]
+[name:;collection:Aircraft;type:engine_turbineLarge%;position:(1.0000, 0.0000, -2.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:metalPurple+metal+dark;]
+[name:;collection:Aircraft;type:engine_capsule;position:(0.0100, 0.8000, 0.5000);rotation:(0.0000, 90.0000, 180.0000);scale:(3.0000, 1.0000, 1.8200);group:;locked:False;hidden:False;materials:_defaultMat+metalPurple+dark;]

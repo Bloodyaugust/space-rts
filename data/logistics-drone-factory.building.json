@@ -7,11 +7,11 @@
       "type": "drone",
       "id": "mining-drone",
       "amount": 1,
-      "time": 3000,
+      "time": 100,
       "inputs": [
         {
           "id": "metal",
-          "amount": 10
+          "amount": 1
         }
       ]
     },
