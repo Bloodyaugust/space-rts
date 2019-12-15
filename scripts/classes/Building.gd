@@ -23,6 +23,7 @@ var production_time: int
 var root
 var spawns := []
 var time_to_production: int
+var want_to_produce: bool = true
 
 var _data := {}
 
@@ -40,7 +41,7 @@ func _process(delta):
 func _produce(delta):
   var _producing_entity = production[current_production]
 
-  if !producing:
+  if !producing && want_to_produce:
     var _all_satisfied: bool = true
 
     for input in _producing_entity["inputs"]:
@@ -61,7 +62,8 @@ func _produce(delta):
 
     if time_to_production <= 0:
       if !auto_build:
-        producing = false
+        want_to_produce = false
+      producing = false
 
       time_to_production = production_time
       match _producing_entity.type:
@@ -70,7 +72,7 @@ func _produce(delta):
 
           _spawn_jobs()
         "drone":
-          _spawn_child(output_drones[current_production])
+          _spawn_child(output_drones[production[current_production].id])
 
 func _ready():
   if tree:
@@ -104,6 +106,7 @@ func _parse_data():
   
   # if production.size() > 1:
   #   auto_build = false
+  #   want_to_produce = false
 
 func _spawn_child(scene):
   var new_actor = scene.instance()
