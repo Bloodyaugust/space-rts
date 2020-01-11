@@ -103,6 +103,9 @@ func _parse_data():
   production_time = _data["production"][current_production]["time"]
   spawns = _data["spawns"]
 
+  if production.size() > 1:
+    current_production = 1
+
   time_to_production = production_time
   for product in production:
     for input in product["inputs"]:

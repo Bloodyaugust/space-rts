@@ -17,13 +17,13 @@
     },
     {
       "type": "drone",
-      "id": "logistics-drone",
+      "id": "transport-drone",
       "amount": 1,
-      "time": 1500,
+      "time": 100,
       "inputs": [
         {
           "id": "metal",
-          "amount": 5
+          "amount": 1
         }
       ]
     }
