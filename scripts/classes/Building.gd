@@ -35,6 +35,16 @@ func handle_click(viewport, event, shape_index):
     BUTTON_MASK_LEFT:
       store.dispatch(actions.game_selection(self))
 
+func _get_child_jobs_of_id(job_id):
+  var _matching_nodes = []
+
+  for child_node in get_children():
+    if child_node.get_class() == "Job":
+      if child_node.data.id == job_id:
+        _matching_nodes.append(child_node)
+
+  return _matching_nodes
+
 func _process(delta):
   _produce(delta)
 
@@ -131,18 +141,24 @@ func _spawn_children():
 func _spawn_jobs():
   for input in production[current_production]["inputs"]:
     if input.id != "ore":
-      for i in range(input.amount):
+      var _existing_jobs_for_id = _get_child_jobs_of_id(input.id)
+      var _jobs_to_create = input.amount - _existing_jobs_for_id.size()
+
+      for i in range(_jobs_to_create):
         var _new_job = Job.new()
         _new_job.type = "unload"
         _new_job.data.id = input.id
-        add_child(_new_job)
+        self.add_child(_new_job)
 
   for key in output_storage.keys():
-    for i in range(output_storage[key]):
+    var _existing_jobs_for_id = _get_child_jobs_of_id(production[current_production].id)
+    var _jobs_to_create = output_storage[key] - _existing_jobs_for_id.size()
+
+    for i in range(_jobs_to_create):
       var _new_job = Job.new()
       _new_job.type = "load"
       _new_job.data.id = production[current_production].id
-      add_child(_new_job)
+      self.add_child(_new_job)
 
 func _load_building():
   var file = File.new()

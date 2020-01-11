@@ -12,7 +12,7 @@
       "type": "resource",
       "id": "metal",
       "amount": 1,
-      "time": 500,
+      "time": 5,
       "inputs": [
         {
           "id": "ore",
