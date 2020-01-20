@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/classes/Projectile.gd" type="Script" id=1]
+[ext_resource path="res://sprites/drone-parts/spaceParts_044.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 18.042
+height = 25.8466
+
+[node name="BasicBullet" type="Node2D"]
+script = ExtResource( 1 )
+id = "basic-bullet"
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+shape = SubResource( 1 )
