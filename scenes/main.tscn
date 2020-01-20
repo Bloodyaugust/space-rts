@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://lib/redux/main.gd" type="Script" id=1]
 [ext_resource path="res://behaviors/generate_map.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://actors/Buildings/refinery.tscn" type="PackedScene" id=5]
 [ext_resource path="res://actors/Buildings/logistics-drone-factory.tscn" type="PackedScene" id=6]
 [ext_resource path="res://actors/Drones/transport-drone.tscn" type="PackedScene" id=7]
+[ext_resource path="res://actors/Projectiles/basic-bullet.tscn" type="PackedScene" id=8]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Camera2D
@@ -161,4 +162,7 @@ position = Vector2( 771.753, 628.557 )
 
 [node name="TransportDrone" parent="." instance=ExtResource( 7 )]
 position = Vector2( 293.93, 422.053 )
+
+[node name="BasicBullet" parent="." instance=ExtResource( 8 )]
+position = Vector2( 338.134, 493.539 )
 [connection signal="pressed" from="CanvasLayer/Button" to="generate_map" method="generate_map"]
