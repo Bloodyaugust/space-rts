@@ -20,14 +20,14 @@ script = ExtResource( 3 )
 [node name="BuildingContent" type="HBoxContainer" parent="."]
 margin_left = 8.33924
 margin_top = 8.33924
-margin_right = 672.124
+margin_right = 858.339
 margin_bottom = 224.339
 custom_constants/separation = 20
 alignment = 1
 
 [node name="BuildingStatus" type="VBoxContainer" parent="BuildingContent"]
-margin_left = 7.0
-margin_right = 245.0
+editor/display_folded = true
+margin_right = 238.0
 margin_bottom = 216.0
 rect_min_size = Vector2( 150, 0 )
 alignment = 1
@@ -98,8 +98,8 @@ custom_fonts/font = ExtResource( 5 )
 text = "10/10"
 
 [node name="ResourceItems" type="VBoxContainer" parent="BuildingContent"]
-margin_left = 265.0
-margin_right = 415.0
+margin_left = 258.0
+margin_right = 408.0
 margin_bottom = 216.0
 rect_min_size = Vector2( 150, 0 )
 alignment = 1
@@ -129,8 +129,8 @@ margin_top = 166.0
 margin_bottom = 190.0
 
 [node name="BuildableItems" type="VBoxContainer" parent="BuildingContent"]
-margin_left = 435.0
-margin_right = 655.0
+margin_left = 428.0
+margin_right = 648.0
 margin_bottom = 216.0
 alignment = 1
 
@@ -143,3 +143,15 @@ margin_bottom = 106.736
 margin_top = 110.0
 margin_right = 220.638
 margin_bottom = 178.736
+
+[node name="BuildingOptions" type="VBoxContainer" parent="BuildingContent"]
+margin_left = 668.0
+margin_right = 850.0
+margin_bottom = 216.0
+alignment = 1
+
+[node name="auto-build" type="CheckButton" parent="BuildingContent/BuildingOptions"]
+margin_top = 83.0
+margin_right = 182.638
+margin_bottom = 133.736
+text = "Auto Build"

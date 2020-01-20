@@ -35,6 +35,14 @@ func handle_click(viewport, event, shape_index):
     BUTTON_MASK_LEFT:
       store.dispatch(actions.game_selection(self))
 
+func set_current_production(production_index):
+  if production_index < production.size():
+    current_production = production_index
+    production_time = _data["production"][current_production]["time"]
+    time_to_production = production_time
+    producing = false
+    want_to_produce = true
+
 func _get_child_jobs_of_id(job_id):
   var _matching_nodes = []
 
@@ -104,7 +112,9 @@ func _parse_data():
   spawns = _data["spawns"]
 
   if production.size() > 1:
-    current_production = 1
+    current_production = 0
+    auto_build = false
+    want_to_produce = false
 
   time_to_production = production_time
   for product in production:
@@ -116,10 +126,6 @@ func _parse_data():
         output_storage[product.id] = 0
       "drone":
         output_drones[product.id] = load("res://actors/Drones/{drone_id}.tscn".format({"drone_id": product.id}))
-  
-  # if production.size() > 1:
-  #   auto_build = false
-  #   want_to_produce = false
 
 func _spawn_child(scene):
   var new_actor = scene.instance()

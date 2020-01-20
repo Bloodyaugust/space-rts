@@ -2,12 +2,14 @@ extends Control
 
 onready var _store = $"/root/store"
 
+onready var _auto_build = $"./BuildingContent/BuildingOptions/auto-build"
 onready var _buildingName: Label = $"./BuildingContent/BuildingStatus/BuildingName"
 onready var _buildingProgress: ProgressBar = $"./BuildingContent/BuildingStatus/ProgressContainer/ProgressBar"
 onready var _buildingHPBar: ProgressBar = $"./BuildingContent/BuildingStatus/HPContainer/HPBar"
 onready var _buildingHPAmount: Label = $"./BuildingContent/BuildingStatus/HPContainer/HPBar/HPAmountContainer/HPAmount"
 onready var _building_resource_items = $"./BuildingContent/ResourceItems"
 onready var _building_buildable_items = $"./BuildingContent/BuildableItems"
+onready var _building_options = $"./BuildingContent/BuildingOptions"
 
 var _active = false
 var _selection = Node.new()
@@ -21,6 +23,19 @@ func _hide():
 
   for _control_node in _building_buildable_items.get_children():
     _control_node.visible = false
+    if _control_node.is_connected("pressed", self, "_on_production_selection"):
+      _control_node.disconnect("pressed", self, "_on_production_selection")
+  
+  for _control_node in _building_options.get_children():
+    _control_node.visible = false
+    if _control_node.is_connected("pressed", self, "_on_auto_build_toggle"):
+      _control_node.disconnect("pressed", self, "_on_auto_build_toggle")
+
+func _on_production_selection(production_index):
+  _selection.set_current_production(production_index)
+
+func _on_auto_build_toggle():
+  _selection.auto_build = _auto_build.pressed
 
 func _on_store_changed(name, state):
   match name:
@@ -68,8 +83,22 @@ func _show():
     _current_resource_item.get_node("./icon").texture = load("res://ui/icons/resources/{id}.png".format({"id": _selection.output_storage.keys()[i]}))
     _current_resource_item.get_node("./label").text = "{id}: {amount}".format({"id": _current_storage_item_id, "amount": _selection.output_storage[_current_storage_item_id]})
   
+  if _selection.production.size() > 1:
+    for i in range(_selection.production.size()):
+      var _current_buildable_item = _building_buildable_items.get_children()[i]
+      var _current_production = _selection.production[i]
+
+      _current_buildable_item.text = _current_production.id
+      _current_buildable_item.visible = true
+      _current_buildable_item.connect("pressed", self, "_on_production_selection", [i])
+      if _selection.current_production == i:
+        _current_buildable_item.modulate = Color(0.784314, 1, 0.721569)
+
+    _auto_build.visible = true
+    _auto_build.connect("pressed", self, "_on_auto_build_toggle")
   # for i in range(_selection.output_storage.keys().size()):
   #   _building_buildable_items.get_children()[i].visible = true
+  # active building color(modulate): c8ffb8, Color(0.784314, 1, 0.721569)
 
 
 func _update_screen():
@@ -95,5 +124,12 @@ func _update_screen():
     _resource_elements[_current_element_index].get_node("./label").text = "{id}: {amount}".format({"id": _key, "amount": _current_value})
     _current_element_index += 1
 
-    
-
+  if _selection.production.size() > 1:
+    for i in range(_selection.production.size()):
+      var _current_buildable_item = _building_buildable_items.get_children()[i]
+      var _current_production = _selection.production[i]
+      
+      if _selection.current_production == i:
+        _current_buildable_item.modulate = Color(0.784314, 1, 0.721569)
+      else:
+        _current_buildable_item.modulate = Color(1, 1, 1)
