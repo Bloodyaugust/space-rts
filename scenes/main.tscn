@@ -162,7 +162,8 @@ position = Vector2( 771.753, 628.557 )
 
 [node name="TransportDrone" parent="." instance=ExtResource( 7 )]
 position = Vector2( 293.93, 422.053 )
+rotation = 2.01935
 
 [node name="BasicBullet" parent="." instance=ExtResource( 8 )]
-position = Vector2( 338.134, 493.539 )
+position = Vector2( 148.399, 239.356 )
 [connection signal="pressed" from="CanvasLayer/Button" to="generate_map" method="generate_map"]

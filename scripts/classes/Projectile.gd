@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Node2D
 class_name Projectile
 
 export var id: String
@@ -26,20 +26,23 @@ func set_direction(new_direction: Vector2):
     ["ballistic", ..]:
       look_at(position + direction_vector)
 
+func _on_area_entered(entering_area):
+  entering_area.get_parent().emit_signal("damage", damage)
+  queue_free()
+
 func _ready():
   _data = _load_projectile()
   _parse_data()
   set_direction(Vector2(1, 1))
+
+  $Area2D.connect("area_entered", self, "_on_area_entered")
 
 func _physics_process(delta):
   var movement_vector = direction_vector * speed * delta
 
   match flags:
     ["ballistic", ..]:
-      var collision := move_and_collide(movement_vector)
-
-      if collision:
-          print("Projectile collided")
+      position += movement_vector
 
 func _parse_data():
 #  Eat the data into a first party data structure

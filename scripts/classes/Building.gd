@@ -53,6 +53,9 @@ func _get_child_jobs_of_id(job_id):
 
   return _matching_nodes
 
+func _on_damage(amount):
+  health -= amount
+
 func _process(delta):
   _produce(delta)
 
@@ -98,6 +101,8 @@ func _ready():
   
   _data = _load_building()
   _parse_data()
+
+  connect("damage", self, "_on_damage")
   
   if root:
     call_deferred("_spawn_children")
