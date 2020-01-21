@@ -2,6 +2,7 @@ extends Node2D
 class_name Building
 
 signal children_spawned
+signal damage
 
 export var id: String
 export var spawn_range: float
@@ -54,7 +55,13 @@ func _get_child_jobs_of_id(job_id):
   return _matching_nodes
 
 func _on_damage(amount):
-  health -= amount
+  current_health -= amount
+  
+  if current_health <= 0:
+    producing = false
+    want_to_produce = false
+    auto_build = false
+    queue_free()
 
 func _process(delta):
   _produce(delta)

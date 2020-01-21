@@ -1,6 +1,7 @@
 extends Node2D
 class_name Drone
 
+signal damage
 signal drone_arrived
 signal drone_destroyed
 signal drone_idle
@@ -86,6 +87,13 @@ func move_towards(point: Vector2):
   else:
     global_translate(_direction_vector * speed * get_process_delta_time())
 
+func _on_damage(amount):
+  health -= amount
+  
+  if health <= 0:
+    do_idle()
+    queue_free()
+
 func _on_job_completed():
   emit_signal("drone_job_completed")
   do_idle()
@@ -94,6 +102,8 @@ func _ready():
   job_types = Array(job_type_string.split(","))
 
   do_idle()
+
+  connect("damage", self, "_on_damage")
 
 func _sort_jobs(a, b):
   return a.position.distance_squared_to(position) < b.position.distance_squared_to(position)
