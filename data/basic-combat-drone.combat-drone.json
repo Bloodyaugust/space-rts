@@ -1,0 +1,8 @@
+{
+    "fire-interval": 0.5,
+    "fire-range": 600,
+    "health": 10,
+    "speed": 200,
+    "projectile-id": "basic-bullet",
+    "target-range": 2000
+}

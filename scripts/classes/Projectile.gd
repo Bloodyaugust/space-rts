@@ -13,6 +13,7 @@ var direction_vector: Vector2
 var health: int
 var flags := []
 var speed: int
+var team: int
 
 var _data := {}
 
@@ -27,13 +28,15 @@ func set_direction(new_direction: Vector2):
       look_at(position + direction_vector)
 
 func _on_area_entered(entering_area):
-  entering_area.get_parent().emit_signal("damage", damage)
-  queue_free()
+  var entering_parent = entering_area.get_parent()
+
+  if entering_parent.team != team:
+    entering_parent.emit_signal("damage", damage)
+    queue_free()
 
 func _ready():
   _data = _load_projectile()
   _parse_data()
-  set_direction(Vector2(1, 1))
 
   $Area2D.connect("area_entered", self, "_on_area_entered")
 

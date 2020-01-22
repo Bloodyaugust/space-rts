@@ -6,6 +6,7 @@ signal damage
 
 export var id: String
 export var spawn_range: float
+export var team: int
 
 onready var actions = $"/root/actions"
 onready var store = $"/root/store"

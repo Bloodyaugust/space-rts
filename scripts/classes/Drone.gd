@@ -16,6 +16,7 @@ export var health: float
 export var job_range: float
 export var job_type_string: String
 export var speed: float
+export var team: int
 
 onready var tree = get_tree()
 
@@ -78,6 +79,7 @@ func move_towards(point: Vector2):
     position = point
     emit_signal("drone_arrived")
   else:
+    look_at(position + _direction_vector)
     global_translate(_direction_vector * speed * get_process_delta_time())
 
 func _on_damage(amount):
