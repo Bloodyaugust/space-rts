@@ -23,13 +23,6 @@ var job: Job
 var job_types: Array
 var state: int
 
-func damage(amount: float):
-  health -= amount
-
-  if health <= 0:
-    state = DRONE_STATES.DESTROYED
-    emit_signal("drone_destroyed")
-
 func do_idle():
   if job != null:
     job.unclaim()
@@ -92,6 +85,8 @@ func _on_damage(amount):
   
   if health <= 0:
     do_idle()
+    state = DRONE_STATES.DESTROYED
+    emit_signal("drone_destroyed")
     queue_free()
 
 func _on_job_completed():
