@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://lib/redux/main.gd" type="Script" id=1]
 [ext_resource path="res://behaviors/generate_map.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://actors/Buildings/logistics-drone-factory.tscn" type="PackedScene" id=6]
 [ext_resource path="res://actors/Drones/transport-drone.tscn" type="PackedScene" id=7]
 [ext_resource path="res://actors/Drones/combat-drone-base.tscn" type="PackedScene" id=8]
+[ext_resource path="res://behaviors/spawn_point.tscn" type="PackedScene" id=9]
+[ext_resource path="res://behaviors/spawn_controller.tscn" type="PackedScene" id=10]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Camera2D
@@ -168,6 +170,29 @@ rotation = 2.01935
 position = Vector2( 334.513, 623.298 )
 
 [node name="CombatDrone2" parent="." instance=ExtResource( 8 )]
-position = Vector2( 845.579, 867.432 )
-team = 1
+position = Vector2( 412.597, 675.354 )
+
+[node name="CombatDrone3" parent="." instance=ExtResource( 8 )]
+position = Vector2( 334.513, 701.383 )
+
+[node name="CombatDrone4" parent="." instance=ExtResource( 8 )]
+position = Vector2( 406.09, 740.425 )
+
+[node name="CombatDrone5" parent="." instance=ExtResource( 8 )]
+position = Vector2( 337.766, 782.721 )
+
+[node name="CombatDrone6" parent="." instance=ExtResource( 8 )]
+position = Vector2( 262.935, 733.918 )
+
+[node name="CombatDrone7" parent="." instance=ExtResource( 8 )]
+position = Vector2( 269.442, 655.833 )
+
+[node name="SpawnPoint" parent="." instance=ExtResource( 9 )]
+position = Vector2( 432.719, 387.169 )
+
+[node name="SpawnPoint2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 930.101, 728.971 )
+
+[node name="SpawnController" parent="." instance=ExtResource( 10 )]
+spawn_interval = null
 [connection signal="pressed" from="CanvasLayer/Button" to="generate_map" method="generate_map"]

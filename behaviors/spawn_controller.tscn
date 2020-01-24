@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/controllers/SpawnController.gd" type="Script" id=1]
+
+[node name="SpawnController" type="Node"]
+script = ExtResource( 1 )
+spawn_difficulty_thresholds = [ 0, 500, 1500 ]
+spawn_interval = 30.0
+spawn_radius = 100.0
