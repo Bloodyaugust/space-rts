@@ -1,15 +1,19 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://lib/redux/main.gd" type="Script" id=1]
 [ext_resource path="res://behaviors/generate_map.tscn" type="PackedScene" id=2]
 [ext_resource path="res://resources/themes/kenney/kenney.tres" type="Theme" id=3]
 [ext_resource path="res://ui/screens/BuildingInspector.tscn" type="PackedScene" id=4]
-[ext_resource path="res://actors/Buildings/refinery.tscn" type="PackedScene" id=5]
-[ext_resource path="res://actors/Buildings/logistics-drone-factory.tscn" type="PackedScene" id=6]
-[ext_resource path="res://actors/Drones/transport-drone.tscn" type="PackedScene" id=7]
-[ext_resource path="res://actors/Drones/combat-drone-base.tscn" type="PackedScene" id=8]
-[ext_resource path="res://behaviors/spawn_point.tscn" type="PackedScene" id=9]
-[ext_resource path="res://behaviors/spawn_controller.tscn" type="PackedScene" id=10]
+[ext_resource path="res://resources/themes/kenney/panel_texture.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui/icons/resources/ore.png" type="Texture" id=6]
+[ext_resource path="res://ui/icons/resources/metal.png" type="Texture" id=7]
+[ext_resource path="res://ui/icons/drones/mining_drone.png" type="Texture" id=8]
+[ext_resource path="res://actors/Buildings/refinery.tscn" type="PackedScene" id=9]
+[ext_resource path="res://actors/Buildings/logistics-drone-factory.tscn" type="PackedScene" id=10]
+[ext_resource path="res://actors/Drones/transport-drone.tscn" type="PackedScene" id=11]
+[ext_resource path="res://actors/Drones/combat-drone-base.tscn" type="PackedScene" id=12]
+[ext_resource path="res://behaviors/spawn_point.tscn" type="PackedScene" id=13]
+[ext_resource path="res://behaviors/spawn_controller.tscn" type="PackedScene" id=14]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Camera2D
@@ -148,54 +152,152 @@ custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 
 [node name="BuildingInspector" parent="CanvasLayer/ScreenContainer" instance=ExtResource( 4 )]
-visible = false
-margin_bottom = 236.0
+margin_right = 886.215
+margin_bottom = 251.752
+
+[node name="ResourceContainer" type="MarginContainer" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -240.0
+margin_right = 240.0
+margin_bottom = 40.0
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/ResourceContainer"]
+margin_right = 480.0
+margin_bottom = 40.0
+theme = ExtResource( 3 )
+custom_styles/panel = ExtResource( 5 )
+
+[node name="ResourceItems" type="HBoxContainer" parent="CanvasLayer/ResourceContainer/PanelContainer"]
+margin_left = 8.33924
+margin_top = 8.33924
+margin_right = 472.124
+margin_bottom = 32.5873
+custom_constants/separation = 6
+alignment = 1
+
+[node name="resource-item-ore" type="HBoxContainer" parent="CanvasLayer/ResourceContainer/PanelContainer/ResourceItems"]
+editor/display_folded = true
+margin_left = 171.0
+margin_right = 207.0
+margin_bottom = 24.0
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/ResourceContainer/PanelContainer/ResourceItems/resource-item-ore"]
+margin_right = 20.0
+margin_bottom = 24.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ResourceContainer/PanelContainer/ResourceItems/resource-item-ore/CenterContainer"]
+margin_top = 2.0
+margin_right = 20.0
+margin_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 20, 20 )
+texture = ExtResource( 6 )
+expand = true
+
+[node name="Label" type="Label" parent="CanvasLayer/ResourceContainer/PanelContainer/ResourceItems/resource-item-ore"]
+margin_left = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+text = "0"
+
+[node name="resource-item-metal" type="HBoxContainer" parent="CanvasLayer/ResourceContainer/PanelContainer/ResourceItems"]
+editor/display_folded = true
+margin_left = 213.0
+margin_right = 249.0
+margin_bottom = 24.0
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/ResourceContainer/PanelContainer/ResourceItems/resource-item-metal"]
+margin_right = 20.0
+margin_bottom = 24.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ResourceContainer/PanelContainer/ResourceItems/resource-item-metal/CenterContainer"]
+margin_top = 2.0
+margin_right = 20.0
+margin_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 20, 20 )
+texture = ExtResource( 7 )
+expand = true
+
+[node name="Label" type="Label" parent="CanvasLayer/ResourceContainer/PanelContainer/ResourceItems/resource-item-metal"]
+margin_left = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+text = "0"
+
+[node name="resource-item-drones" type="HBoxContainer" parent="CanvasLayer/ResourceContainer/PanelContainer/ResourceItems"]
+margin_left = 255.0
+margin_right = 291.0
+margin_bottom = 24.0
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/ResourceContainer/PanelContainer/ResourceItems/resource-item-drones"]
+margin_right = 20.0
+margin_bottom = 24.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ResourceContainer/PanelContainer/ResourceItems/resource-item-drones/CenterContainer"]
+margin_top = 2.0
+margin_right = 20.0
+margin_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 20, 20 )
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Label" type="Label" parent="CanvasLayer/ResourceContainer/PanelContainer/ResourceItems/resource-item-drones"]
+margin_left = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+text = "0"
 
 [node name="NoiseExperiment" type="Sprite" parent="."]
 visible = false
 position = Vector2( 22.6642, 58.6946 )
 texture = SubResource( 8 )
 
-[node name="Refinery" parent="." instance=ExtResource( 5 )]
+[node name="Refinery" parent="." instance=ExtResource( 9 )]
 position = Vector2( 584, 432 )
 
-[node name="LogisticsDroneFactory" parent="." instance=ExtResource( 6 )]
+[node name="LogisticsDroneFactory" parent="." instance=ExtResource( 10 )]
 position = Vector2( 771.753, 628.557 )
 
-[node name="LogisticsDroneFactory2" parent="." instance=ExtResource( 6 )]
+[node name="LogisticsDroneFactory2" parent="." instance=ExtResource( 10 )]
 position = Vector2( 508.218, 589.515 )
 
-[node name="TransportDrone" parent="." instance=ExtResource( 7 )]
+[node name="TransportDrone" parent="." instance=ExtResource( 11 )]
 position = Vector2( 293.93, 422.053 )
 rotation = 2.01935
 
-[node name="CombatDrone" parent="." instance=ExtResource( 8 )]
+[node name="CombatDrone" parent="." instance=ExtResource( 12 )]
 position = Vector2( 334.513, 623.298 )
 
-[node name="CombatDrone2" parent="." instance=ExtResource( 8 )]
+[node name="CombatDrone2" parent="." instance=ExtResource( 12 )]
 position = Vector2( 412.597, 675.354 )
 
-[node name="CombatDrone3" parent="." instance=ExtResource( 8 )]
+[node name="CombatDrone3" parent="." instance=ExtResource( 12 )]
 position = Vector2( 334.513, 701.383 )
 
-[node name="CombatDrone4" parent="." instance=ExtResource( 8 )]
+[node name="CombatDrone4" parent="." instance=ExtResource( 12 )]
 position = Vector2( 406.09, 740.425 )
 
-[node name="CombatDrone5" parent="." instance=ExtResource( 8 )]
+[node name="CombatDrone5" parent="." instance=ExtResource( 12 )]
 position = Vector2( 337.766, 782.721 )
 
-[node name="CombatDrone6" parent="." instance=ExtResource( 8 )]
+[node name="CombatDrone6" parent="." instance=ExtResource( 12 )]
 position = Vector2( 262.935, 733.918 )
 
-[node name="CombatDrone7" parent="." instance=ExtResource( 8 )]
+[node name="CombatDrone7" parent="." instance=ExtResource( 12 )]
 position = Vector2( 269.442, 655.833 )
 
-[node name="SpawnPoint" parent="." instance=ExtResource( 9 )]
+[node name="SpawnPoint" parent="." instance=ExtResource( 13 )]
 position = Vector2( 432.719, 387.169 )
 
-[node name="SpawnPoint2" parent="." instance=ExtResource( 9 )]
+[node name="SpawnPoint2" parent="." instance=ExtResource( 13 )]
 position = Vector2( 930.101, 728.971 )
 
-[node name="SpawnController" parent="." instance=ExtResource( 10 )]
+[node name="SpawnController" parent="." instance=ExtResource( 14 )]
 spawn_interval = null
 [connection signal="pressed" from="CanvasLayer/Button" to="generate_map" method="generate_map"]
