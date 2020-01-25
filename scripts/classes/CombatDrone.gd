@@ -42,10 +42,10 @@ func _find_target():
 func _fire():
   var _new_projectile = _projectile_scene.instance()
   _new_projectile.position = position
-  _new_projectile.set_direction((_current_target.position - position).normalized())
   _new_projectile.team = team
 
   root.add_child(_new_projectile)
+  _new_projectile.set_direction((_current_target.position - position).normalized())
   _time_to_fire = fire_interval
 
 func _process(delta):
