@@ -96,10 +96,9 @@ func _show():
       _current_buildable_item.text = _current_production.id
       _current_buildable_item.visible = true
       _current_buildable_item.connect("pressed", self, "_on_production_selection", [i])
-      if _selection.current_production == i:
-        _current_buildable_item.modulate = Color(0.784314, 1, 0.721569)
 
     _auto_build.visible = true
+    _auto_build.pressed = _selection.auto_build
     _auto_build.connect("pressed", self, "_on_auto_build_toggle")
 
 func _update_screen():
@@ -130,7 +129,7 @@ func _update_screen():
       var _current_buildable_item = _building_buildable_items.get_children()[i]
       var _current_production = _selection.production[i]
       
-      if _selection.current_production == i:
+      if _selection.current_production == i && _selection.want_to_produce:
         _current_buildable_item.modulate = Color(0.784314, 1, 0.721569)
       else:
         _current_buildable_item.modulate = Color(1, 1, 1)
