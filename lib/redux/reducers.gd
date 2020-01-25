@@ -13,3 +13,10 @@ func game(state, action):
     next_state['selection'] = action['node']
     return next_state
   return state
+
+func player(state, action):
+  if action['type'] == types.PLAYER_ADD_RESOURCE_COUNT:
+    var next_state = store.shallow_copy(state)
+    next_state['resources'][action['resource_id']] += action['amount']
+    return next_state
+  return state

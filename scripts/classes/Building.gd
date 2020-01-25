@@ -83,6 +83,7 @@ func _produce(delta):
 
       for input in _producing_entity["inputs"]:
         input_storage[input.id] -= input.amount
+        store.dispatch(actions.player_add_resource_count(input.id, -input.amount))
 
         _spawn_jobs()
 
@@ -98,6 +99,7 @@ func _produce(delta):
       match _producing_entity.type:
         "resource":
           output_storage[_producing_entity.id] += _producing_entity.amount
+          store.dispatch(actions.player_add_resource_count(_producing_entity.id, _producing_entity.amount))
 
           _spawn_jobs()
         "drone":
@@ -148,6 +150,7 @@ func _spawn_child(scene):
     new_actor.parent_building = self
 
   root.add_child(new_actor)
+  store.dispatch(actions.player_add_resource_count("drones", 1))
 
 func _spawn_children():
   for spawn_definition in spawns:

@@ -22,6 +22,7 @@ func _on_drone_arrived():
 
   if _mining_state == MINING_STATES.RETURN_MATERIALS:
     target_building.input_storage["ore"] += _ore_storage
+    store.dispatch(actions.player_add_resource_count("ore", 1))
     _ore_storage = 0
     _mining_state = MINING_STATES.JOB
 

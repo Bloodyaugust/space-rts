@@ -18,6 +18,8 @@ export var job_type_string: String
 export var speed: float
 export var team: int
 
+onready var actions = $"/root/actions"
+onready var store = $"/root/store"
 onready var tree = get_tree()
 
 var job: Job
@@ -82,6 +84,9 @@ func move_towards(point: Vector2):
   else:
     look_at(position + _direction_vector)
     global_translate(_direction_vector * speed * get_process_delta_time())
+
+func _exit_tree():
+  store.dispatch(actions.player_add_resource_count("drones", -1))
 
 func _on_damage(amount):
   health -= amount

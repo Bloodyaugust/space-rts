@@ -8,7 +8,8 @@ onready var _empty_node = Node.new()
 
 func _ready():
   store.create([
-    {'name': 'game', 'instance': reducers}
+    {'name': 'game', 'instance': reducers},
+    {'name': 'player', 'instance': reducers}
   ], [
     {'name': '_on_store_changed', 'instance': self}
   ])

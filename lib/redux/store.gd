@@ -4,7 +4,14 @@ var _state = {
   "game": {
     "start_time": 0,
     "selection": Node2D.new()
-   }
+   },
+  "player": {
+    "resources": {
+      "drones": 0,
+      "metal": 0,
+      "ore": 0
+    }
+  }
  }
 var _reducers = {}
 

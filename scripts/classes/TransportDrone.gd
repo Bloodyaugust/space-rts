@@ -12,6 +12,11 @@ var _current_id: String
 var _transport_state: int
 var _storage := {}
 
+func _exit_tree():
+  for _resource_id in _storage.keys():
+    if _storage[_resource_id] > 0:
+      store.dispatch(actions.player_add_resource_count(_resource_id, -_storage[_resource_id]))
+
 func _on_drone_idle():
   pass
 
