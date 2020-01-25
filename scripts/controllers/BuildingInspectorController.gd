@@ -40,7 +40,6 @@ func _on_auto_build_toggle():
 func _on_store_changed(name, state):
   match name:
     "game":
-      print("Got game state change: ", state)
       if state["selection"].get_class() == "Building":
         _selection = state["selection"]
 

@@ -45,6 +45,15 @@ func set_current_production(production_index):
     producing = false
     want_to_produce = true
 
+func _exit_tree():
+  for _resource_id in input_storage.keys():
+    if input_storage[_resource_id] > 0:
+      store.dispatch(actions.player_add_resource_count(_resource_id, -input_storage[_resource_id]))
+
+  for _resource_id in output_storage.keys():
+    if output_storage[_resource_id] > 0:
+      store.dispatch(actions.player_add_resource_count(_resource_id, -output_storage[_resource_id]))
+
 func _get_child_jobs_of_id(job_id):
   var _matching_nodes = []
 
