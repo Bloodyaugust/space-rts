@@ -25,10 +25,11 @@ var job_types: Array
 var state: int
 
 func do_idle():
-  if job != null:
+  if is_instance_valid(job):
     job.unclaim()
     job.disconnect("job_completed", self, "_on_job_completed")
-    job = null
+  
+  job = null
   
   state = DRONE_STATES.IDLE
   emit_signal("drone_idle")

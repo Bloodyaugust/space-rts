@@ -162,6 +162,9 @@ position = Vector2( 584, 432 )
 [node name="LogisticsDroneFactory" parent="." instance=ExtResource( 6 )]
 position = Vector2( 771.753, 628.557 )
 
+[node name="LogisticsDroneFactory2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 508.218, 589.515 )
+
 [node name="TransportDrone" parent="." instance=ExtResource( 7 )]
 position = Vector2( 293.93, 422.053 )
 rotation = 2.01935

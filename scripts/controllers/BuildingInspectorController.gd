@@ -12,7 +12,7 @@ onready var _building_buildable_items = $"./BuildingContent/BuildableItems"
 onready var _building_options = $"./BuildingContent/BuildingOptions"
 
 var _active = false
-var _selection = Node.new()
+var _selection: Node
 
 func _hide():
   _active = false
@@ -54,7 +54,10 @@ func _on_store_changed(name, state):
 
 func _process(delta):
   if _active:
-    _update_screen()
+    if _selection:
+      _update_screen()
+    else:
+      hide()
 
 func _ready():
   _hide()
@@ -65,6 +68,8 @@ func _show():
 
   _active = true
   visible = true
+
+  _selection.connect("tree_exited", self, "set", ["_selection", null])
 
   for i in range(_input_storage_size):
     var _current_resource_item = _building_resource_items.get_children()[i]
@@ -96,15 +101,11 @@ func _show():
 
     _auto_build.visible = true
     _auto_build.connect("pressed", self, "_on_auto_build_toggle")
-  # for i in range(_selection.output_storage.keys().size()):
-  #   _building_buildable_items.get_children()[i].visible = true
-  # active building color(modulate): c8ffb8, Color(0.784314, 1, 0.721569)
-
 
 func _update_screen():
   var _current_element_index = 0
   var _resource_elements = _building_resource_items.get_children()
-
+  
   _buildingName.text = _selection.id
   _buildingProgress.value = _selection.production_time - _selection.time_to_production
   _buildingProgress.max_value = _selection.production_time

@@ -35,10 +35,10 @@ func _on_drone_job_completed():
 
 func _process(delta):
   if _transport_state == TRANSPORT_STATES.LOAD:
-    if job == null:
+    if !is_instance_valid(job):
       find_job(job_types[0])
 
-    if job != null:
+    if is_instance_valid(job):
       if state == Drone.DRONE_STATES.IDLE || state == Drone.DRONE_STATES.MOVING:
         move_towards(job.global_position)
         
@@ -46,10 +46,10 @@ func _process(delta):
         do_job_progress(load_unload_rate * delta)
 
   if _transport_state == TRANSPORT_STATES.UNLOAD:
-    if job == null:
+    if !is_instance_valid(job):
       find_job(job_types[1], _current_id)
 
-    if job != null:
+    if is_instance_valid(job):
       if state == Drone.DRONE_STATES.IDLE || state == Drone.DRONE_STATES.MOVING:
         move_towards(job.global_position)
         

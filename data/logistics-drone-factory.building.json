@@ -1,7 +1,12 @@
 {
   "id": "logistics-drone-factory",
   "health": 100,
-  "spawns": [],
+  "spawns": [
+    {
+      "id": "transport-drone",
+      "count": 2
+    }
+  ],
   "production": [
     {
       "type": "drone",

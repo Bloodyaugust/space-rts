@@ -6,7 +6,7 @@
 [node name="asteroid" type="Node2D"]
 script = ExtResource( 1 )
 jobs_max = 5
-ore_range = [ 100, 200 ]
+ore_range = [ 10, 11 ]
 scale_max = 3.0
 
 [node name="Sprite" type="Sprite" parent="."]

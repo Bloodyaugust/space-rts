@@ -56,7 +56,6 @@ func _process(delta):
       _current_target = _find_target()
 
       if _current_target != null:
-        print("target found")
         _combat_state = COMBAT_STATES.ATTACKING
 
     COMBAT_STATES.ATTACKING:
