@@ -18,8 +18,6 @@ export var job_type_string: String
 export var speed: float
 export var team: int
 
-onready var actions = $"/root/actions"
-onready var store = $"/root/store"
 onready var tree = get_tree()
 
 var job: Job

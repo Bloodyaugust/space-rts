@@ -1,7 +1,5 @@
 extends Control
 
-onready var _store = $"/root/store"
-
 onready var _drones_label: Label = $"./PanelContainer/ResourceItems/resource-item-drones/Label"
 onready var _metal_label: Label = $"./PanelContainer/ResourceItems/resource-item-metal/Label"
 onready var _ore_label: Label = $"./PanelContainer/ResourceItems/resource-item-ore/Label"

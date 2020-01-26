@@ -1,7 +1,5 @@
 extends Control
 
-onready var _store = $"/root/store"
-
 onready var _auto_build = $"./BuildingContent/BuildingOptions/auto-build"
 onready var _buildingName: Label = $"./BuildingContent/BuildingStatus/BuildingName"
 onready var _buildingProgress: ProgressBar = $"./BuildingContent/BuildingStatus/ProgressContainer/ProgressBar"

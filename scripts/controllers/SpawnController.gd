@@ -8,8 +8,6 @@ export(Array, int) var spawn_difficulty_thresholds: Array
 export var spawn_interval: float
 export var spawn_radius: float
 
-onready var actions = $"/root/actions"
-onready var store = $"/root/store"
 onready var tree = get_tree()
 onready var root = tree.get_root()
 

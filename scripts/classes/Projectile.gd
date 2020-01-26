@@ -3,8 +3,6 @@ class_name Projectile
 
 export var id: String
 
-onready var actions = $"/root/actions"
-onready var store = $"/root/store"
 onready var tree = get_tree()
 
 var current_health: int
