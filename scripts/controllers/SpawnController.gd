@@ -4,6 +4,7 @@ signal wave_spawned
 
 enum SPAWN_DIFFICULTIES {EASY, MEDIUM, HARD}
 
+export var _enabled: bool
 export(Array, int) var spawn_difficulty_thresholds: Array
 export var spawn_interval: float
 export var spawn_radius: float
@@ -22,31 +23,32 @@ var _time_to_wave: float
 var _data := {}
 
 func _process(delta):
-  _game_time_elapsed += delta
-  _time_to_wave -= delta
+  if _enabled:
+    _game_time_elapsed += delta
+    _time_to_wave -= delta
 
-  _current_difficulty = SPAWN_DIFFICULTIES.EASY
-  if _game_time_elapsed >= spawn_difficulty_thresholds[SPAWN_DIFFICULTIES.MEDIUM]:
-    _current_difficulty = SPAWN_DIFFICULTIES.MEDIUM
-  if _game_time_elapsed >= spawn_difficulty_thresholds[SPAWN_DIFFICULTIES.HARD]:
-    _current_difficulty = SPAWN_DIFFICULTIES.HARD
+    _current_difficulty = SPAWN_DIFFICULTIES.EASY
+    if _game_time_elapsed >= spawn_difficulty_thresholds[SPAWN_DIFFICULTIES.MEDIUM]:
+      _current_difficulty = SPAWN_DIFFICULTIES.MEDIUM
+    if _game_time_elapsed >= spawn_difficulty_thresholds[SPAWN_DIFFICULTIES.HARD]:
+      _current_difficulty = SPAWN_DIFFICULTIES.HARD
 
-  if _time_to_wave <= 0:
-    var _current_wave_set = waves[str(_current_difficulty)]
-    var _selected_wave = _current_wave_set[randi() % _current_wave_set.size()]
-    var _selected_spawn_point = spawn_points[randi() % spawn_points.size()]
-    
-    for _enemy_id in _selected_wave:
-      var _new_drone = _drone_scene.instance()
+    if _time_to_wave <= 0:
+      var _current_wave_set = waves[str(_current_difficulty)]
+      var _selected_wave = _current_wave_set[randi() % _current_wave_set.size()]
+      var _selected_spawn_point = spawn_points[randi() % spawn_points.size()]
+      
+      for _enemy_id in _selected_wave:
+        var _new_drone = _drone_scene.instance()
 
-      _new_drone.position = _selected_spawn_point.position + Vector2(rand_range(-spawn_radius, spawn_radius), rand_range(-spawn_radius, spawn_radius))
-      _new_drone.id = _enemy_id
-      _new_drone.team = 1
+        _new_drone.position = _selected_spawn_point.position + Vector2(rand_range(-spawn_radius, spawn_radius), rand_range(-spawn_radius, spawn_radius))
+        _new_drone.id = _enemy_id
+        _new_drone.team = 1
 
-      root.add_child(_new_drone)
-    
-    _time_to_wave = spawn_interval
-    emit_signal("wave_spawned")
+        root.add_child(_new_drone)
+      
+      _time_to_wave = spawn_interval
+      emit_signal("wave_spawned")
 
 func _ready():
   _data = _load_waves()

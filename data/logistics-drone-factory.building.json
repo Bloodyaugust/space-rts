@@ -1,5 +1,8 @@
 {
   "id": "logistics-drone-factory",
+  "cost": {
+    "metal": 10
+  },
   "health": 100,
   "spawns": [
     {

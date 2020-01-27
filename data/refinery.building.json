@@ -1,5 +1,8 @@
 {
   "id": "refinery",
+  "cost": {
+    "metal": 1
+  },
   "health": 20,
   "spawns": [
     {

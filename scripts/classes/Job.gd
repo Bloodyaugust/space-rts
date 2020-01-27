@@ -6,6 +6,7 @@ export var type: String
 signal job_available
 signal job_claimed
 signal job_completed
+signal job_after_completed
 signal job_in_progress
 signal job_progressed
 
@@ -31,6 +32,7 @@ func do_progress(amount: float):
   if completion >= 1:
     state = JOB_STATES.COMPLETE
     emit_signal("job_completed")
+    emit_signal("job_after_completed")
     queue_free()
   else:
     emit_signal("job_progressed")

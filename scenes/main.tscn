@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://lib/redux/main.gd" type="Script" id=1]
 [ext_resource path="res://behaviors/generate_map.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://actors/Buildings/logistics-drone-factory.tscn" type="PackedScene" id=7]
 [ext_resource path="res://behaviors/spawn_point.tscn" type="PackedScene" id=8]
 [ext_resource path="res://behaviors/spawn_controller.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scripts/classes/BuildingGhost.gd" type="Script" id=10]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Camera2D
@@ -173,5 +174,11 @@ position = Vector2( 432.719, 387.169 )
 position = Vector2( 930.101, 728.971 )
 
 [node name="SpawnController" parent="." instance=ExtResource( 9 )]
+pause_mode = 1
 spawn_interval = null
+
+[node name="BuildingGhost" type="Node2D" parent="."]
+position = Vector2( 746.393, 459.319 )
+script = ExtResource( 10 )
+id = "refinery"
 [connection signal="pressed" from="CanvasLayer/Button" to="generate_map" method="generate_map"]
