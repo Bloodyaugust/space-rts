@@ -149,7 +149,6 @@ custom_constants/margin_bottom = 20
 
 [node name="BuildingInspector" parent="CanvasLayer/ScreenContainer" instance=ExtResource( 4 )]
 margin_right = 886.215
-margin_bottom = 251.752
 
 [node name="ResourceContainer" parent="CanvasLayer" instance=ExtResource( 5 )]
 
@@ -175,7 +174,7 @@ position = Vector2( 930.101, 728.971 )
 
 [node name="SpawnController" parent="." instance=ExtResource( 9 )]
 pause_mode = 1
-spawn_interval = null
+spawn_interval = 0.0
 
 [node name="BuildingGhost" type="Node2D" parent="."]
 position = Vector2( 746.393, 459.319 )
