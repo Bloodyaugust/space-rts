@@ -84,6 +84,8 @@ store="*res://lib/redux/store.gd"
 action_types="*res://lib/redux/action_types.gd"
 actions="*res://lib/redux/actions.gd"
 reducers="*res://lib/redux/reducers.gd"
+Functional="*res://lib/util/Functional.gd"
+GDUtil="*res://lib/util/GDUtil.gd"
 DataController="*res://scripts/controllers/DataController.gd"
 
 [display]

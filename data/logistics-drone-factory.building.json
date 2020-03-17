@@ -3,7 +3,9 @@
   "cost": {
     "metal": 10
   },
+  "description": "Creates drones key to your logistical operations.",
   "health": 100,
+  "name": "Logistics Drone Factory",
   "spawns": [
     {
       "id": "transport-drone",

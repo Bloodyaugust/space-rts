@@ -3,7 +3,9 @@
   "cost": {
     "metal": 1
   },
+  "description": "Refines ore into metal.",
   "health": 20,
+  "name": "Refinery",
   "spawns": [
     {
       "id": "mining-drone",

@@ -4,7 +4,7 @@ onready var actions = get_node('/root/actions')
 onready var reducers = get_node('/root/reducers')
 onready var store = get_node('/root/store')
 
-onready var _empty_node = Node.new()
+onready var _empty_node = Node2D.new()
 
 func _ready():
   store.create([

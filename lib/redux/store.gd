@@ -2,6 +2,7 @@ extends Node
 
 var _state = {
   "game": {
+    "new_building_id": "",
     "start_time": 0,
     "selection": Node2D.new()
    },

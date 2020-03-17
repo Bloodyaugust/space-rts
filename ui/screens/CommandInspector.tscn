@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://resources/themes/kenney/kenney.tres" type="Theme" id=1]
+[ext_resource path="res://ui/elements/buildable-item.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/themes/kenney/panel_texture.tres" type="StyleBox" id=3]
+[ext_resource path="res://scripts/controllers/CommandInspectorController.gd" type="Script" id=4]
+
+[node name="CommandInspector" type="PanelContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 700.0
+margin_bottom = 236.0
+theme = ExtResource( 1 )
+custom_styles/panel = ExtResource( 3 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+_buildable_item_control = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 8.33924
+margin_top = 8.33924
+margin_right = 672.124
+margin_bottom = 208.587
+alignment = 1
+
+[node name="BuildableItems" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 66.0
+margin_right = 663.0
+margin_bottom = 134.0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="buildable-item" parent="VBoxContainer/BuildableItems" instance=ExtResource( 2 )]
+margin_left = 307.0
+margin_top = 0.0
+margin_right = 355.638
+margin_bottom = 68.7363
+text = ""

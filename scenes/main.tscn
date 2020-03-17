@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://lib/redux/main.gd" type="Script" id=1]
 [ext_resource path="res://behaviors/generate_map.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://behaviors/spawn_point.tscn" type="PackedScene" id=8]
 [ext_resource path="res://behaviors/spawn_controller.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scripts/classes/BuildingGhost.gd" type="Script" id=10]
+[ext_resource path="res://ui/screens/CommandInspector.tscn" type="PackedScene" id=11]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Camera2D
@@ -146,9 +147,15 @@ custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BuildingInspector" parent="CanvasLayer/ScreenContainer" instance=ExtResource( 4 )]
-margin_right = 886.215
+visible = false
+margin_bottom = 236.0
+
+[node name="CommandInspector" parent="CanvasLayer/ScreenContainer" instance=ExtResource( 11 )]
 
 [node name="ResourceContainer" parent="CanvasLayer" instance=ExtResource( 5 )]
 

@@ -2,6 +2,12 @@ extends Node
 
 onready var types = get_node('/root/action_types')
 
+func game_set_new_building_id(id):
+  return {
+    'type': types.GAME_SET_NEW_BUILDING_ID,
+    'id': id
+  }
+
 func game_set_start_time(time):
   return {
     'type': types.GAME_SET_START_TIME,
