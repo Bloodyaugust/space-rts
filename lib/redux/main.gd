@@ -22,3 +22,6 @@ func _unhandled_input(event):
   if event is InputEventMouseButton and event.button_mask == BUTTON_MASK_LEFT:
     store.dispatch(actions.game_selection(_empty_node))
 
+func _process(_delta):
+  if Input.is_action_pressed("ui_cancel"):
+    store.dispatch(actions.game_selection(_empty_node))

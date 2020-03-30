@@ -6,6 +6,7 @@ onready var _buildable_items = $"./VBoxContainer/BuildableItems"
 
 var _active = false
 var _new_building_id: String
+var _pending_building_ghost: Sprite
 
 func _create_building_tooltip(building_data)->String:
   var _tooltip: String = building_data.name + "\r\n\r\n" + building_data.description + "\r\n\r\n--Cost--\r\n"
@@ -33,6 +34,9 @@ func _hide():
 func _on_new_building_selection(building_id):
   store.dispatch(actions.game_set_new_building_id(building_id))
 
+  _pending_building_ghost.texture = load("res://sprites/buildings/{id}.png".format({"id": building_id}))
+  _pending_building_ghost.visible = true
+
 func _on_store_changed(name, state):
   match name:
     "game":
@@ -51,6 +55,9 @@ func _on_store_changed(name, state):
 
 func _populate():
   GDUtil.free_children(_buildable_items)
+
+  _pending_building_ghost = load("res://actors/PendingBuildingSprite.tscn").instance()
+  get_tree().get_root().add_child(_pending_building_ghost)
 
   for i in range(DataController.buildings.keys().size()):
     var _current_building_data = DataController.buildings[DataController.buildings.keys()[i]]

@@ -25,7 +25,8 @@ func _physics_process(delta):
   if Input.is_action_pressed(\"ui_down\"):
     translate(Vector2(0, 1) * camera_move_speed * delta)
   if Input.is_action_pressed(\"ui_up\"):
-    translate(Vector2(0, -1) * camera_move_speed * delta)"
+    translate(Vector2(0, -1) * camera_move_speed * delta)
+"
 
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
