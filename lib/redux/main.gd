@@ -23,5 +23,6 @@ func _unhandled_input(event):
     store.dispatch(actions.game_selection(_empty_node))
 
 func _process(_delta):
-  if Input.is_action_pressed("ui_cancel"):
+  if Input.is_action_just_pressed("ui_cancel"):
     store.dispatch(actions.game_selection(_empty_node))
+    store.dispatch(actions.game_set_new_building_id(""))

@@ -2,9 +2,9 @@ extends Node
 
 var _state = {
   "game": {
-    "new_building_id": "",
+    "new_building_id": "", # Selected new building option
     "start_time": 0,
-    "selection": Node2D.new()
+    "selection": Node2D.new() # Current player node selection
    },
   "player": {
     "resources": {

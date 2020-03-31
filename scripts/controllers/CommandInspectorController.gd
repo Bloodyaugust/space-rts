@@ -12,9 +12,7 @@ func _create_building_tooltip(building_data)->String:
   var _tooltip: String = building_data.name + "\r\n\r\n" + building_data.description + "\r\n\r\n--Cost--\r\n"
 
   for _key in building_data.cost.keys():
-    print("Building data", building_data)
     _tooltip += "{cost_id}: {cost_value}\r\n".format({"cost_id": _key, "cost_value": building_data.cost[_key]})
-    print("New tooltip: ", _tooltip)
 
   return _tooltip
 
@@ -34,16 +32,11 @@ func _hide():
 func _on_new_building_selection(building_id):
   store.dispatch(actions.game_set_new_building_id(building_id))
 
-  _pending_building_ghost.texture = load("res://sprites/buildings/{id}.png".format({"id": building_id}))
-  _pending_building_ghost.visible = true
-
 func _on_store_changed(name, state):
   match name:
     "game":
-      print("Game selection class: ", state["selection"].get_class())
+      _new_building_id = state["new_building_id"]
       if state["selection"].get_class() == "Node2D":
-        _new_building_id = state["new_building_id"]
-
         if _active == false:
           _show()
 
@@ -87,7 +80,6 @@ func _show():
     var _current_buildable_item_id = DataController.buildings.keys()[i]
     
     _current_buildable_item.visible = true
-    print("Creating tooltip for index: ", i)
     _current_buildable_item.hint_tooltip = _create_building_tooltip(DataController.buildings[_current_buildable_item_id])
     _current_buildable_item.connect("pressed", self, "_on_new_building_selection", [_current_buildable_item_id])
 

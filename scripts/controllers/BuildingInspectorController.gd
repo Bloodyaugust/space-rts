@@ -49,7 +49,7 @@ func _on_store_changed(name, state):
         if _active == true:
           _hide()
 
-func _process(delta):
+func _process(_delta):
   if _active:
     if _selection:
       _update_screen()
