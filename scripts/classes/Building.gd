@@ -30,7 +30,7 @@ var _data := {}
 func get_class():
   return "Building"
 
-func handle_click(viewport, event, shape_index):
+func handle_click(_viewport, event, _shape_index):
   match event.button_mask:
     BUTTON_MASK_LEFT:
       store.dispatch(actions.game_selection(self))
