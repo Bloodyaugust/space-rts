@@ -20,6 +20,8 @@ export var team: int
 
 onready var tree = get_tree()
 
+onready var _area2d = $"./Area2D"
+
 var job: Job
 var job_types: Array
 var state: int
@@ -82,6 +84,15 @@ func move_towards(point: Vector2):
   else:
     look_at(position + _direction_vector)
     global_translate(_direction_vector * speed * get_process_delta_time())
+
+func set_team(new_team: int):
+  _area2d.set_collision_layer_bit(team, false)
+  _area2d.set_collision_mask_bit(team, true)
+
+  team = new_team
+
+  _area2d.set_collision_layer_bit(team, true)
+  _area2d.set_collision_mask_bit(team, false)
 
 func _exit_tree():
   store.dispatch(actions.player_add_resource_count("drones", -1))

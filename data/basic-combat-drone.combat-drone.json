@@ -1,8 +1,11 @@
 {
-    "fire-interval": 0.5,
-    "fire-range": 600,
     "health": 10,
     "speed": 200,
-    "projectile-id": "basic-bullet",
+    "weapons": [
+        {
+            "id": "basic-gun",
+            "position": [10, 0]
+        }
+    ],
     "target-range": 2000
 }

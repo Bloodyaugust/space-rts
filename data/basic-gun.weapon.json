@@ -1,0 +1,7 @@
+{
+  "clip-size": 3,
+  "cooldown": 0.5,
+  "flags": [],
+  "projectile": "basic-bullet",
+  "reload": 2
+}

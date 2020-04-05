@@ -153,6 +153,8 @@ func _spawn_child(scene):
   var new_actor = scene.instance()
   new_actor.position = position + Vector2(rand_range(-spawn_range / 2, spawn_range / 2), rand_range(-spawn_range / 2, spawn_range / 2))
 
+  new_actor.set_team(team)
+
   if "parent_building" in new_actor:
     new_actor.parent_building = self
 

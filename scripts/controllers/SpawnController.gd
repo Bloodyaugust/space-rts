@@ -43,7 +43,7 @@ func _process(delta):
 
         _new_drone.position = _selected_spawn_point.position + Vector2(rand_range(-spawn_radius, spawn_radius), rand_range(-spawn_radius, spawn_radius))
         _new_drone.id = _enemy_id
-        _new_drone.team = 1
+        _new_drone.set_team(1)
 
         root.add_child(_new_drone)
       
