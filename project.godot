@@ -54,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/classes/Projectile.gd"
 }, {
+"base": "Node2D",
+"class": "Storage",
+"language": "GDScript",
+"path": "res://scripts/classes/Storage.gd"
+}, {
 "base": "Drone",
 "class": "TransportDrone",
 "language": "GDScript",
@@ -74,6 +79,7 @@ _global_script_class_icons={
 "LevelLoader": "",
 "MiningDrone": "",
 "Projectile": "",
+"Storage": "",
 "TransportDrone": "",
 "Weapon": ""
 }

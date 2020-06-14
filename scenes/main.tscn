@@ -190,5 +190,5 @@ spawn_interval = 0.0
 [node name="BuildingGhost" type="Node2D" parent="."]
 position = Vector2( 746.393, 459.319 )
 script = ExtResource( 10 )
-id = "refinery"
+id = "volatiles-storage"
 [connection signal="pressed" from="CanvasLayer/Button" to="generate_map" method="generate_map"]
