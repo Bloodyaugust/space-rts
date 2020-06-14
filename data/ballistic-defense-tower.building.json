@@ -1,0 +1,15 @@
+{
+  "id": "ballistic-defense-tower",
+  "cost": {
+    "metal": 5,
+    "ballistics": 1
+  },
+  "description": "A simple tower that fires ballistic projectiles at enemies.",
+  "health": 100,
+  "name": "Ballistic Defense Tower",
+  "spawns": [],
+  "production": [],
+  "weapons": [
+    "basic-gun"
+  ]
+}

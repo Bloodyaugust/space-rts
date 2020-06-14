@@ -1,0 +1,28 @@
+{
+  "id": "ballistics-printer",
+  "cost": {
+    "metal": 5
+  },
+  "description": "Uses metal and volatiles to produce ballistics.",
+  "health": 20,
+  "name": "Ballistics Printer",
+  "spawns": [],
+  "production": [
+    {
+      "type": "resource",
+      "id": "ballistics",
+      "amount": 1,
+      "time": 5,
+      "inputs": [
+        {
+          "id": "metal",
+          "amount": 2
+        },
+        {
+          "id": "volatiles",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

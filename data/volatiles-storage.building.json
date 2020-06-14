@@ -1,0 +1,17 @@
+{
+  "id": "volatiles-storage",
+  "cost": {
+    "metal": 1
+  },
+  "description": "Stores volatiles to be used in weapons production.",
+  "health": 20,
+  "name": "Volatiles Storage",
+  "spawns": [],
+  "storage": [
+    {
+      "id": "volatiles",
+      "amount": 20
+    }
+  ],
+  "production": []
+}
