@@ -86,13 +86,7 @@ func move_towards(point: Vector2):
     global_translate(_direction_vector * speed * get_process_delta_time())
 
 func set_team(new_team: int):
-  _area2d.set_collision_layer_bit(team, false)
-  _area2d.set_collision_mask_bit(team, true)
-
-  team = new_team
-
-  _area2d.set_collision_layer_bit(team, true)
-  _area2d.set_collision_mask_bit(team, false)
+  call_deferred("_set_team", new_team)
 
 func _exit_tree():
   store.dispatch(actions.player_add_resource_count("drones", -1))
@@ -116,6 +110,15 @@ func _ready():
   do_idle()
 
   connect("damage", self, "_on_damage")
+
+func _set_team(new_team: int)->void:
+  _area2d.set_collision_layer_bit(team, false)
+  _area2d.set_collision_mask_bit(team, true)
+
+  team = new_team
+
+  _area2d.set_collision_layer_bit(team, true)
+  _area2d.set_collision_mask_bit(team, false)
 
 func _sort_jobs(a, b):
   return a.position.distance_squared_to(position) < b.position.distance_squared_to(position)

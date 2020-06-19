@@ -25,7 +25,7 @@ func set_direction(new_direction: Vector2):
       look_at(position + new_direction)
 
 func set_team(new_team: int)->void:
-  call_deferred("_set_team")
+  call_deferred("_set_team", new_team)
 
 func _on_area_entered(entering_area):
   var entering_parent = entering_area.get_parent()

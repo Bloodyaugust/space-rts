@@ -149,6 +149,12 @@ func _parse_data():
       "drone":
         output_drones[product.id] = load("res://actors/Drones/{drone_id}.tscn".format({"drone_id": product.id}))
 
+  if _data.has("storage") && _data["storage"].size() > 0:
+    var _new_storage_instance = Storage.new()
+
+    _new_storage_instance.id = id
+    add_child(_new_storage_instance)
+
 func _spawn_child(scene):
   var new_actor = scene.instance()
   new_actor.position = position + Vector2(rand_range(-spawn_range / 2, spawn_range / 2), rand_range(-spawn_range / 2, spawn_range / 2))
